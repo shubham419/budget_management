@@ -10,124 +10,62 @@
 
 <style>
     .button {
-	display: flex;
-	height: 50px;
-	padding: 0;
-	background: #008b95;
-	border: none;
-	outline: none;
-	border-radius: 5px;
-	overflow: hidden;
-	font-family: "Quicksand", sans-serif;
-	font-size: 16px;
-	font-weight: 500;
-	cursor: pointer;
-}
+        display: flex;
+        height: 50px;
+        padding: 0;
+        background: #008b95;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        overflow: hidden;
+        font-family: "Quicksand", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+    }
 
-.button:hover {
-	background: #01676e;
-}
+    .button:hover {
+        background: #01676e;
+    }
 
-.button:active {
-	background: rgb(1, 110, 117);
-}
+    .button:active {
+        background: rgb(1, 110, 117);
+    }
 
-.button__text,
-.button__icon {
-	display: inline-flex;
-	align-items: center;
-	padding: 0 24px;
-	color: #fff;
-	height: 100%;
-}
+    .button__text,
+    .button__icon {
+        display: inline-flex;
+        align-items: center;
+        padding: 0 24px;
+        color: #fff;
+        height: 100%;
+    }
 
-.button__icon {
-	font-size: 1.5em;
-	background: rgba(0, 0, 0, 0.08);
-}
-
-.popup .overlay{
-position: fixed;
-top:0px;
-left:0px;
-width:100vw;
-height:100vh;
-background: rgba(0, 0, 0, 0.7) ;
-z-index: 1;
-}
-
-.popup .content{
-position:absolute ;
-top:30%;
-left:35%;
-background : #fff;
-width: 450px;
-height: 250px;
-z-index: 1;
-text-align: center;
-padding: 20px;
-box-sizing: border-box;
-}
-
-.popup .close-btn {
-    cursor: pointer;
-    position : absolute;
-    right:20px;
-    top:20px;
-    width:30px;
-    height:30px;
-    background : #222 ;
-    color: #fff;
-    font-size : 25px;
-    font-weight : 600;
-    line-height : 30px;
-    text-align:center;
-    border-radius : 50%;
-}
-
-
-
+    .button__icon {
+        font-size: 1.5em;
+        background: rgba(0, 0, 0, 0.08);
+    }
 </style>
+
 <body style="margin:0 ;">
 
-	
-    <div class="popup" id="popup-1" style="display: none ;">
-        <div class="overlay"></div>
-        <div class="content">
-        <div class="close-btn" onclick="togglePopup()">&times;
-        </div>
-        <h1>choose category</h1>
-      
-        <div>
-       
-        <input type="radio" >
-        <label style="font-size: 28px;">Food</label><br>
-        <input type="radio">
-        <label style="font-size: 28px;">Cloth</label><br>
-        <input type="radio">
-        <label style="font-size: 28px;">Travel</label><br>
-        <input type="radio">
-        <label style="font-size: 28px;">Movie</label><br>
-       
-    </div>
-        </div>
+
+    <div
+        style=" display: block; padding-top: 300px; padding-bottom: 250Px; text-align: center; background-color: rgb(217,217,217); ">
+
+        <div class='parent' style=" display: inline;">
+            <div class='child' style="display: inline; font-size: 30px; padding-top: 400px;">Enter Amount:</div>
+            <input type="text" placeholder="amount" required style="font-size: 30px;">
         </div>
 
-<div style=" display: block; padding-top: 300px; padding-bottom: 250Px; text-align: center; background-color: rgb(217,217,217); ">
-   
-		<div class='parent' style=" display: inline;">
-        <div class='child' style="display: inline; font-size: 30px; padding-top: 400px;">Enter Amount:</div>
-        <input type="text" placeholder="amount" required style="font-size: 30px;">
+        <div class='parent' style="display: inline; margin-left: 300px; ">
+            <div class='child' style=" display: inline; font-size: 30px;">Enter pin:</div>
+            <input type="password" placeholder="pin" required style="font-size: 30px;">
+        </div>
     </div>
-
-    <div class='parent' style="display: inline; margin-left: 300px; ">
-        <div class='child' style=" display: inline; font-size: 30px;">Enter pin:</div>
-        <input type="password" placeholder="pin" required style="font-size: 30px;">
-    </div>
-   </div>
 
     <div style="margin-top: -25px; margin-left: 765px;">
-        <button type="button" class="button" onclick="togglePopup()" >
+        <button type="button" class="button" onclick="location.href='payment_successful.html'">
             <span class="button__text">PAY</span>
             <span class="button__icon"></span>
         </button>
@@ -135,12 +73,4 @@ box-sizing: border-box;
 
 </body>
 
-<script>
-	function togglePopup(){
-	  var element =  document.getElementById("popup-1");
-	  element.style.display = 'block';
-	}
-	
-	</script>
-	
 </html>
