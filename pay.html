@@ -53,24 +53,42 @@
     <div
         style=" display: block; padding-top: 300px; padding-bottom: 250Px; text-align: center; background-color: rgb(217,217,217); ">
 
-        <div class='parent' style=" display: inline;">
+        <div  class='parent' style=" display: inline;">
             <div class='child' style="display: inline; font-size: 30px; padding-top: 400px;">Enter Amount:</div>
-            <input type="text" placeholder="amount" required style="font-size: 30px;">
+            <input  id="amount" type="text" placeholder="amount"  style="font-size: 30px;">
         </div>
 
         <div class='parent' style="display: inline; margin-left: 300px; ">
             <div class='child' style=" display: inline; font-size: 30px;">Enter pin:</div>
-            <input type="password" placeholder="pin" required style="font-size: 30px;">
+            <input id="pass" type="password" placeholder="pin"  style="font-size: 30px;">
         </div>
     </div>
 
     <div style="margin-top: -25px; margin-left: 765px;">
-        <button type="button" class="button" onclick="location.href='payment_successful.html'">
+        <button type="button" class="button" onclick="pay_btn_clicked();">
             <span class="button__text">PAY</span>
             <span class="button__icon"></span>
         </button>
 
-
 </body>
+
+<script>
+
+function pay_btn_clicked(){
+
+    var x = document.getElementById("amount").value;
+    var y = document.getElementById("pass").value;
+
+    if(x === "" && y === ""){
+        alert("Please enter information");
+    }
+    else{
+        window.open('payment_successful.html',"_self");  
+    }
+
+}
+
+</script>
+
 
 </html>
