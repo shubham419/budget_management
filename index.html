@@ -8,18 +8,19 @@
   <title>Document</title>
 </head>
 <style>
-.item{
-  background-color: #ffffff;
-  width: 700px;
-  margin: 50px;
-  text-align: center;
-  line-height: 75px;
-  font-size: 30px;
-  font-weight: bold;
-  border-radius: 100px; overflow: hidden;
-}
-
+  .item {
+    background-color: #ffffff;
+    width: 700px;
+    margin: 50px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 100px;
+    overflow: hidden;
+  }
 </style>
+
 <body style="margin: 0%; ">
 
   <div style="background-color: rgb(217, 217, 217);">
@@ -28,26 +29,32 @@
       way</small>
     <h1 style="text-align: center; font-family: sans-serif; font-size: 4.2vw; padding-bottom: 11vw; margin-top: -2px;">
       to manage your budget</h1>
-    </div>
+  </div>
 
-    <div class="flex-container" style="display: flex;  flex-direction: row; margin-top: -160px; ">
-      <div  class="item" onclick="openPage('make_payment.html')" >Make New Payment
-      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">easily send money to your contact and business</small></div>
-      </div>
-      <div class="item" onclick="openPage('make_payment.html')" >Categories
-      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">manage your expenses categories</small></div>
-      </div>
-      <div  class="item"onclick="openPage()" >Analysis
-      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">analysis of your monthly budget</small></div>
-      </div>
+  <div class="flex-container" style="display: flex;  flex-direction: row; margin-top: -160px; ">
+    <div class="item">
+
+      <div><small onclick="openPage('make_payment.html')"
+          style="margin-top: -10px; cursor:pointer;  font-weight: bold; font-size: 28px;">Make New Payment</small></div>
+      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">easily send money to your
+          contact and business</small></div>
     </div>
+    <div class="item" onclick="openPage('make_payment.html')">Categories
+      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">manage your expenses
+          categories</small></div>
+    </div>
+    <div class="item" onclick="openPage()">Analysis
+      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">analysis of your monthly
+          budget</small></div>
+    </div>
+  </div>
 
 
 </body>
 <script>
-function openPage(url){
-  window.open(url);
-}
+  function openPage(url) {
+    window.open(url, "_self");
+  }
 </script>
 
 </html>
