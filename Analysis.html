@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Analysis</title>
   <style>
     .center {
       margin: auto;
@@ -112,7 +112,21 @@
         "#00aba9",
         "#2b5797",
         "#e8c3b9",
-        "#1e7145"
+        "#1e7145",
+        "#145001",
+        "#508CBE",
+        "#ADF487",
+        "#1C5CF8",
+        "#FD4BA9",
+        "#BFB541",
+        "#C42D4C",
+        "#2D8960",
+        "#9F0A1E",
+        "#18EC4E",
+        "#4B4151",
+        "#6DAE52",
+        "#76CFDB",
+        "#465742"
       ];
 
       var chart = new Chart("myChart", {
@@ -137,8 +151,27 @@
     function setBarChart(finalValue) {
       var xValues = finalCategories;
       var yValues = finalValue;
-      var barColors = ["red", "green", "blue", "orange", "brown"];
-
+      var barColors = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145",
+        "#145001",
+        "#508CBE",
+        "#ADF487",
+        "#1C5CF8",
+        "#FD4BA9",
+        "#BFB541",
+        "#C42D4C",
+        "#2D8960",
+        "#9F0A1E",
+        "#18EC4E",
+        "#4B4151",
+        "#6DAE52",
+        "#76CFDB",
+        "#465742"
+      ];
       new Chart("bar", {
         type: "bar",
         data: {

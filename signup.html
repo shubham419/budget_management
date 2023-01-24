@@ -1,12 +1,12 @@
 <html>
 <head>
-<title>Firebase Authentication</title>
+<title>Sign up</title>
 <link rel="stylesheet" href="cssFile.css">
 </head>
 
 <body>
   
-<div id="login-box">
+<div id="login-box" style="height: 400px;">
   <div class="left">
     <h1 id='status'>login</h1>
     <input type="text" id="email" name="email" placeholder="E-mail" />
@@ -66,61 +66,19 @@ logIn.addEventListener('click',(e)=>{
 
       signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in 
         const user = userCredential.user;
-
         const dt = new Date();
          update(ref(database, 'users/' + user.uid),{
           last_login: dt,
         })
-        // openPage('index.html')
-         alert('User login');
-        // ...
+        openPage('index.html')
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-
         alert(errorMessage);
   });
-   checkUser();
  });
-
-
-
-function checkUser(){
-const user = auth.currentUser;
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    openPage('index.html')
-    //bla bla bla
-    // ...
-  } else {
-    // User is signed out
-    // ...
-    //bla bla bla
-  }
-});
-}
-
-
-logout.addEventListener('click',(e)=>{
-
-   signOut(auth).then(() => {
-     // Sign-out successful.
-     alert('user loged out');
-   }).catch((error) => {
-     // An error happened.
-     const errorCode = error.code;
-     const errorMessage = error.message;
-
-        alert(errorMessage);
-   });
-
-});
 
 </script>
 

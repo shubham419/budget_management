@@ -1,54 +1,155 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, maximum-scale=1">
+<title>Budget-Management</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css"> 
+<link href="css/font-awesome.css" rel="stylesheet" type="text/css"> 
+<link href="css/animate.css" rel="stylesheet" type="text/css">
+  
 </head>
-<style>
-  .item {
-    background-color: #ffffff;
-    width: 700px;
-    margin: 50px;
-    text-align: center;
-    line-height: 75px;
-    font-size: 30px;
-    font-weight: bold;
-    border-radius: 100px;
-    overflow: hidden;
-  }
-</style>
+<body>
 
-<body style="margin: 0%; ">
-
-  <div style="background-color: rgb(217, 217, 217);">
-    <small
-      style="text-align: center; font-family: sans-serif; font-size: 4.2vw; padding-top: 5vw; display: block;">Efficient
-      way</small>
-    <h1 style="text-align: center; font-family: sans-serif; font-size: 4.2vw; padding-bottom: 11vw; margin-top: -2px;">
-      to manage your budget</h1>
-  </div>
-
-  <div class="flex-container" style="display: flex;  flex-direction: row; margin-top: -160px; ">
-    <div class="item">
-
-      <div><small onclick="openPage('make_payment.html')"
-          style="margin-top: -10px; cursor:pointer;  font-weight: bold; font-size: 28px;">Make New Payment</small></div>
-      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">easily send money to your
-          contact and business</small></div>
-    </div>
-    <div class="item" onclick="openPage('categories.html')">Categories
-      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">manage your expenses
-          categories</small></div>
-    </div>
-    <div class="item" onclick="openPage('Analysis.html')">Analysis
-      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">analysis of your monthly
-          budget</small></div>
+<!--Header_section-->
+<header id="header_wrapper">
+  <div class="container">
+    <div class="header_box">
+      <!-- <div class="logo"><a href="#"><img src="img/logo.png" alt="logo"></a></div> -->
+	  <nav class="navbar navbar-inverse" role="navigation">
+      <div class="navbar-header">
+        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        </div>
+	    <div id="main-nav" class="collapse navbar-collapse navStyle">
+			<ul class="nav navbar-nav" id="mainNav">
+			  <li class="active"><a href="#hero_section" class="scroll-link">Home</a></li>
+			  <!-- <li><a href="#aboutUs" class="scroll-link">About Us</a></li> -->
+			  <li><a href="#service" class="scroll-link">Services</a></li>
+			  <!-- <li><a href="#Portfolio" class="scroll-link">Portfolio</a></li> -->
+			  <!-- <li><a href="#clients" class="scroll-link">Clients</a></li> -->
+			  <!-- <li><a href="#team" class="scroll-link">Team</a></li> -->
+			  <li><a href="#contact" class="scroll-link">Feedback</a></li>
+			</ul>
+      </div>
+	 </nav>
     </div>
   </div>
+</header>
+<!--Header_section--> 
 
+<!--Hero_Section-->
+<section id="hero_section" class="top_cont_outer">
+  <div class="hero_wrapper">
+    <div class="container">
+      <div class="hero_section">
+        <div class="row">
+          <div class="col-lg-5 col-sm-7">
+            <div class="top_left_cont zoomIn wow animated"> 
+              <h2>Efficient way to <strong>manage</strong> your budget</h2>
+              <p>It is a simple yet effective method for managing all of your transactions.</p>
+              <a href="#service" class="read_more2">Know More</a> </div>
+          </div>
+          <div class="col-lg-7 col-sm-5">
+			<img src="img/main_device_image.png" class="zoomIn wow animated" alt="" />
+		  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Hero_Section--> 
+
+
+
+<!--Service-->
+<section  id="service">
+  <div class="container">
+    <h2>Services</h2>
+    <div class="service_wrapper">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="service_block">
+            <div class="service_icon delay-03s animated wow  zoomIn"> <span onclick="openPage('make_payment.html')" ><i class="fa fa-sign-in"></i></span> </div>
+            <h3 class="animated fadeInUp wow">Make New Payment</h3>
+            <p class="animated fadeInDown wow">Send money to your contacts and businesses with ease and security.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 borderLeft">			
+          <div class="service_block">
+            <div class="service_icon icon2  delay-03s animated wow zoomIn"> <span onclick="openPage('categories.html')" ><i class="fa fa-edit"></i></span> </div>
+            <h3 class="animated fadeInUp wow">Categories</h3>
+            <p class="animated fadeInDown wow">Manage your expense categories.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 borderLeft">
+          <div class="service_block">
+            <div class="service_icon icon3  delay-03s animated wow zoomIn"> <span onclick="openPage('Analysis.html')" ><i class="fa fa-bar-chart"></i></span> </div>
+            <h3 class="animated fadeInUp wow">Analysis</h3>
+            <p class="animated fadeInDown wow">Analysis of your monthly budget</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Service-->
+
+
+<!--Footer-->
+<footer class="footer_wrapper" id="contact">
+  <div class="container">
+    <section class="page_section contact" id="contact">
+      <div class="contact_section">
+        <h2>FEEDBACK</h2>
+        <div class="row">
+          <div class="col-lg-4">
+            
+          </div>
+          <div class="col-lg-4">
+           
+          </div>
+          <div class="col-lg-4">
+          
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 wow fadeInLeft">	
+		
+       		  
+			  
+          
+          <ul class="social_links">
+            <li class="twitter animated bounceIn wow delay-02s"><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+            <li class="facebook animated bounceIn wow delay-03s"><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
+            <li class="pinterest animated bounceIn wow delay-04s"><a href="javascript:void(0)"><i class="fa fa-pinterest"></i></a></li>
+            <li class="gplus animated bounceIn wow delay-05s"><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li> 
+          </ul>
+        </div>
+        <div class="col-lg-8 wow fadeInLeft delay-06s">
+          <div class="form">
+            <input class="input-text" type="text" name="" value="Your Name *" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+            <input class="input-text" type="text" name="" value="Your E-mail *" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+            <textarea class="input-text text-area" cols="0" rows="0" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">Your Message *</textarea>
+            <input class="input-btn" type="submit" value="send message">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+</footer>
+
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-scrolltofixed.js"></script>
+<script type="text/javascript" src="js/jquery.nav.js"></script> 
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/jquery.isotope.js"></script>
+<script type="text/javascript" src="js/wow.js"></script> 
+<script type="text/javascript" src="js/custom.js"></script>
 
 </body>
 <script>
@@ -56,47 +157,4 @@
     window.open(url, "_self");
   }
 </script>
-
-<script type="module" >
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
-  authDomain: "budget-management-6b80f.firebaseapp.com",
-  databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
-  projectId: "budget-management-6b80f",
-  storageBucket: "budget-management-6b80f.appspot.com",
-  messagingSenderId: "190001410215",
-  appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
-  measurementId: "G-TS3P5XEB13"
-
-};
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth();
-
-  function checkUser(){
-    const user = auth.currentUser;
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        alert('user exist');
-     
-      } else {
-        // User is signed out
-        // ...
-        openPage('signup.html')
-
-      }
-    });
-    }
-    
-    window.onload = checkUser();
-</script>
-
-
 </html>
