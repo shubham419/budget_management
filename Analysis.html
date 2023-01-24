@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .center {
+      margin: auto;
+      margin-top: 100px;
+
+    }
+  </style>
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<body>
+
+  <canvas id="myChart" class="center" style="width:100%;max-width:600px"></canvas>
+  <canvas id="bar" style="width:100%;max-width:600px"></canvas>
+
+
+  <script type="module">
+    import { getDatabase, set, child, ref, update, get } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
+      authDomain: "budget-management-6b80f.firebaseapp.com",
+      databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
+      projectId: "budget-management-6b80f",
+      storageBucket: "budget-management-6b80f.appspot.com",
+      messagingSenderId: "190001410215",
+      appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
+      measurementId: "G-TS3P5XEB13"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
+    var finalCategories = [];
+
+    function getallDattaOnce() {
+      getCategories();
+      const dbRef = ref(db);
+      var transaction = [];
+
+      get(child(dbRef, "transaction"))
+        .then((snapshot) => {
+
+          snapshot.forEach(childSnapshot => {
+            transaction.push(childSnapshot.val());
+          });
+          console.log(transaction[0]["category"])
+          var finalValue = getValue(transaction);
+          setPiChart(finalValue);
+          setBarChart(finalValue);
+
+        });
+
+    }
+
+    function getValue(transaction) {
+      // console.log(finalCategories[0]);
+      var size = finalCategories.length;
+      console.log(size)
+      var arrValue = new Array(size); for (let i = 0; i < size; ++i) arrValue[i] = 0;
+
+      for (var i = 0; i < transaction.length; i++) {
+        var indexNo = parseInt(getIndex(transaction[i]["category"]));
+        var money = parseInt(transaction[i]["moneySpend"]);
+        arrValue[indexNo] = arrValue[indexNo] + money;
+      }
+      return arrValue;
+    }
+
+    function getIndex(category) {
+      finalCategories[0]
+      for (var i = 0; i < finalCategories.length; i++) {
+        if (category == finalCategories[i]) {
+          return i;
+        }
+      }
+    }
+
+    function getCategories() {
+      const dbRef = ref(db);
+      var category = [];
+
+      get(child(dbRef, "categories"))
+        .then((snapshot) => {
+          snapshot.forEach(childSnapshot => {
+            category.push(childSnapshot.val());
+          });
+          for (var i = 0; i < category[0].length; i++) {
+            finalCategories[i] = category[0][i];
+          }
+        });
+    }
+    window.onload = getallDattaOnce;
+    //---------------------------------------------------------------------------------------------
+
+    function setPiChart(finalValue) {
+
+      var xValues = finalCategories;
+      // console.log(xValues)
+      var yValues = finalValue;
+      var barColors = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145"
+      ];
+
+      var chart = new Chart("myChart", {
+        type: "pie",
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+          }]
+        },
+
+        options: {
+          title: {
+            display: true,
+            text: "Total Spend",
+          }
+        }
+      });
+    }
+
+    function setBarChart(finalValue) {
+      var xValues = finalCategories;
+      var yValues = finalValue;
+      var barColors = ["red", "green", "blue", "orange", "brown"];
+
+      new Chart("bar", {
+        type: "bar",
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+          }]
+        },
+        options: {
+          legend: { display: false },
+          title: {
+            display: false,
+            text: "Total Spend"
+          }
+        }
+      });
+    }
+
+  </script>
+
+</body>
+
+</html>

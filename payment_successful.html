@@ -1,33 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .radioName {
+            padding-left: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+            font-size: 25px;
+            color: rgb(56, 54, 52);
+        }
+
+        .radioButton {
+            margin-right: 20px;
+        }
+
+        .button {
+            display: flex;
+            height: 50px;
+            padding: 0;
+            background: #008b95;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            overflow: hidden;
+            font-family: "Quicksand", sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #01676e;
+        }
+
+        .button:active {
+            background: rgb(1, 110, 117);
+        }
+
+        .button__text,
+        .button__icon {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 24px;
+            color: #fff;
+            height: 100%;
+        }
+
+        .button__icon {
+            font-size: 1.5em;
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .center {
+            margin: auto;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body style="background-color: rgb(217,217,217);">
 
-    
-    <img src="img.png" alt="Transaction completed Succcessfully" style=" display: block; margin-left: auto; margin-right: auto;" >
+
+    <img src="img.png" alt="Transaction completed Succcessfully"
+        style=" display: block; margin-left: auto; margin-right: auto;">
 
 
     <div style="border-radius: 25px; background: #fff; margin: auto; width: 400px; ">
-    
+
         <h3 style="text-align: center; padding-top:10px; font-size: 30px;">Category</h3>
 
-<div style="padding-left: 20px; padding-bottom: 10px; font-size: 25px; color: rgb(56, 54, 52);">
-    <input type="radio"  name="Category">
-    <label>Food</label><br>
-    <input type="radio" name="Category" >
-    <label>Cloth</label><br>
-    <input type="radio" name="Category" >
-    <label>Travel</label><br>
-    <input type="radio" name="Category" >
-    <label>Movie</label>
-</div>
+        <div class="listHolder">
+            <!-- <input class="radioButton" type="radio"  name="Category">
+    <label class="radioName">Food</label><br>
+    <input class="radioButton"type="radio" name="Category" >
+    <label class="radioName">Cloth</label><br>
+    <input class="radioButton" type="radio" name="Category" >
+    <label class="radioName">Travel</label><br>
+    <input class="radioButton" type="radio" name="Category" >
+    <label class="radioName">Movie</label> -->
+        </div>
 
     </div>
+    <div>
+        <button type="button" id="button" class="button center">
+            <span class="button__text">Processed</span>
+            <span class="button__icon"><ion-icon name="send-outline"></ion-icon></span>
+        </button>
+    </div>
+
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 
 </body>
+<script>
+function openPage(url) {
+    window.open(url, "_self");
+  }
+</script>
+
+<script type="module">
+    import { getDatabase, set, child, ref, update, get } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
+        authDomain: "budget-management-6b80f.firebaseapp.com",
+        databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
+        projectId: "budget-management-6b80f",
+        storageBucket: "budget-management-6b80f.appspot.com",
+        messagingSenderId: "190001410215",
+        appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
+        measurementId: "G-TS3P5XEB13"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
+    const urlParams = new URLSearchParams(window.location.search);
+    const database = getDatabase(app);
+    const value = urlParams.get('value');
+
+
+    button.addEventListener('click', () => {
+
+         var categorySelected = getRadioValue();
+         var moneySpend = getMoney();
+         saveData(categorySelected , moneySpend);
+         openPage('index.html')
+    })
+
+    function saveData(categorySelected, moneySpend){
+        var  x = Math.random() * 100;
+        x = parseInt(x);
+        set(ref(database, 'transaction/' + x ),{
+         category: categorySelected,
+         moneySpend: moneySpend
+      })
+
+    }
+
+    function getRadioValue() {
+        var ele = document.getElementsByName('Category');
+
+        for (var i = 0; i < ele.length; i++) {
+            if (ele[i].checked) {
+                return ele[i].value;
+              
+            }
+        }
+    }
+
+    function getMoney(){
+        const urlParams = new URLSearchParams(window.location.search);
+       return urlParams.get('value'); 
+    }
+
+    function getallDattaOnce() {
+        const dbRef = ref(db);
+        var category = [];
+
+        get(child(dbRef, "categories"))
+            .then((snapshot) => {
+
+                snapshot.forEach(childSnapshot => {
+                    category.push(childSnapshot.val());
+                });
+
+                loadDataInList(category);
+
+            });
+    }
+
+    function loadDataInList(category) {
+
+
+        for (var i = 0; i < category[0].length; i++) {
+            const divList = document.querySelector('.listHolder');
+
+            var radioInput = document.createElement("input");
+            var label = document.createElement("label");
+            const lineBreak = document.createElement('br');
+            radioInput.type = "radio";
+            radioInput.value = category[0][i];
+            radioInput.name = "Category";
+            radioInput.className = "radioButton";
+            label.className = "radioName";
+            label.innerHTML = category[0][i];
+            label.appendChild(radioInput);
+            reverseChildren(label);
+            label.appendChild(lineBreak);
+            divList.parentNode.insertBefore(label, divList.nextSibling);
+
+        }
+
+    }
+
+
+
+    function reverseChildren(parent) {
+        for (var i = 1; i < parent.childNodes.length; i++) {
+            parent.insertBefore(parent.childNodes[i], parent.firstChild);
+        }
+    }
+
+
+    window.onload = getallDattaOnce;
+
+
+</script>
+
+
 </html>

@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Budget Management - Categories</title>
+  <!-- using font awesome for icons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <!-- using google font -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet">
+  <!-- importing reset and main css -->
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="todoBlock">
+      <!-- main title holder -->
+      <div class="titleHolder">
+        <h1>Categories</h1>
+      </div>
+      <!-- form holder -->
+      <div class="formHolder">
+        <div class="col big">
+          <input type="text" id="addInput">
+        </div>
+        <div class="col">
+          <button type="button" id="addBtn" class="btn-primary">Add Item</button>
+        </div>
+        <div class="col">
+          <button type="button" id="toggleBtn" class="btn-primary">Save</button>
+        </div>
+      </div>
+      <!-- todo list -->
+      <div class="todoList">
+        <!-- list holder -->
+        <div class="listHolder">
+          <ul class="list">
+            <!-- <li>
+              <span class="listName">Macbook</span>
+            </li>
+            <li>
+              <span class="listName">Amazon Firestick</span>
+            </li>
+            <li>
+              <span class="listName">Keyboard</span>
+            </li>
+            <li>
+              <span class="listName">Headphones</span>
+            </li>
+            <li>
+              <span class="listName">Airpods</span>
+            </li> -->
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!-- importing custom js -->
+  <script src="main.js"></script>
+</body>
+
+<script type="module">
+ // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+  import { getDatabase, set, child , ref, update, get } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+  apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
+  authDomain: "budget-management-6b80f.firebaseapp.com",
+  databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
+  projectId: "budget-management-6b80f",
+  storageBucket: "budget-management-6b80f.appspot.com",
+  messagingSenderId: "190001410215",
+  appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
+  measurementId: "G-TS3P5XEB13"
+};
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const db = getDatabase();
+
+
+    function getallDattaOnce(){
+      const dbRef = ref(db);
+      var category = [];
+
+      get (child(dbRef, "categories"))
+      .then((snapshot)=>{
+
+       snapshot.forEach(childSnapshot =>{
+        category.push(childSnapshot.val());
+      }); 
+      loadDataInList(category);
+    });
+
+    }
+
+//const toggleBtn = document.querySelector('#toggleBtn');
+toggleBtn.addEventListener('click', () => {
+  alert('User login');
+
+  var list = document.getElementsByClassName('listName');
+  var listArray=[];
+  for (var i=0;i<list.length;i++){
+    listArray.push(list[i].innerHTML);
+   }
+
+  set(ref(database, 'categories/'),{
+         categoryList: listArray
+      })
+}); 
+
+   function loadDataInList(category){
+ 
+    const divList = document.querySelector('.listHolder');
+    const ul = divList.querySelector('ul');
+
+    for (var i = 0; i < category[0].length; i++)
+     {
+    
+      const li = document.createElement('li'); 
+      const span = document.createElement("SPAN");
+      // li.classList.add("listName");s
+      span.className = 'listName';
+      span.innerHTML = category[0][i];
+      li.appendChild(span);
+      ul.appendChild(li);
+      createBtn(li);
+      // console.log(category[0][i]); 
+     }
+    //  console.log(category);
+
+   }
+
+   function createBtn(li) {
+  // create remove button
+  const remove = document.createElement('button');
+  remove.className = 'btn-icon remove';
+  li.appendChild(remove);
+
+  // create down button
+  const down = document.createElement('button');
+  down.className = 'btn-icon down';
+  li.appendChild(down);
+
+  // create up button
+  const up = document.createElement('button');
+  up.className = 'btn-icon up';
+  li.appendChild(up);
+
+  return li;
+}
+
+   window.onload = getallDattaOnce;
+
+</script>
+
+
+</html>

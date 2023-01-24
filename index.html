@@ -39,11 +39,11 @@
       <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">easily send money to your
           contact and business</small></div>
     </div>
-    <div class="item" onclick="openPage('make_payment.html')">Categories
+    <div class="item" onclick="openPage('categories.html')">Categories
       <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">manage your expenses
           categories</small></div>
     </div>
-    <div class="item" onclick="openPage()">Analysis
+    <div class="item" onclick="openPage('Analysis.html')">Analysis
       <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">analysis of your monthly
           budget</small></div>
     </div>
@@ -56,5 +56,47 @@
     window.open(url, "_self");
   }
 </script>
+
+<script type="module" >
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
+  authDomain: "budget-management-6b80f.firebaseapp.com",
+  databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
+  projectId: "budget-management-6b80f",
+  storageBucket: "budget-management-6b80f.appspot.com",
+  messagingSenderId: "190001410215",
+  appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
+  measurementId: "G-TS3P5XEB13"
+
+};
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+
+  function checkUser(){
+    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        alert('user exist');
+     
+      } else {
+        // User is signed out
+        // ...
+        openPage('signup.html')
+
+      }
+    });
+    }
+    
+    window.onload = checkUser();
+</script>
+
 
 </html>
