@@ -1,18 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Pay</title>
-</head>
-<style>
-	.button {
+<html>
+  <head>
+    <style>
+      .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 800px;
+        height: 600px;
+        background: linear-gradient(156deg, #6CE5E8, #494F56);
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        margin: 50px auto;
+        position: relative;
+        animation: slideIn 1s ease-out;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .center-buttons {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+      .btn {
+        padding: 10px 20px;
+        border: 2px solid black;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 20px;
+        margin: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        background-color: #007bff;
+        color: white;
+      }
+      .btn:hover {
+        transform: scale(1.1);
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      }
+      .bottom-right-btn {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background-color: #dc3545;
+        color: white;
+        border-radius: 50px;
+        padding: 20px 30px;
+        font-size: 25px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        animation: pulse 1s ease-out infinite;
+      }
+      @keyframes pulse {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.05);
+        }
+      }
+      .button {
 		display: flex;
 		height: 100px;
 		padding: 0;
-		background: #009578;
+		background: #004AAD;
 		border: none;
 		outline: none;
 		border-radius: 5px;
@@ -24,11 +82,11 @@
 	}
 
 	.button:hover {
-		background: #008168;
+		background: #2A235E;
 	}
 
 	.button:active {
-		background: #006e58;
+		background: #004AAD;
 	}
 
 	.button__text,
@@ -44,44 +102,45 @@
 		font-size: 1.5em;
 		background: rgba(0, 0, 0, 0.08);
 	}
-</style>
-
-<body style="background-color: rgb(217,217,217);">
-
-	<form style="visibility: hidden;">
+    </style>
+  </head>
+<body  class = "card" style="background-color: rgb(217,217,217);">
+<div class="center-buttons " >
+  <form style="visibility: hidden; margin-left: -200px;">
 		<input id="qr" type="file">
 	</form>
 
-	<div style="margin-top: 300px ; margin-left: 750px; ">
-		<button type="button" class="button" onclick="qr_selected();">
+    <img src="img3.png" alt="Italian Trulli" style="width:100px;height:100px; margin-top:60px; margin-right: -40px;">
+
+    <div  class="card">
+      <div class="center-buttons">
+        <button type="button" class="button btn" onclick="qr_selected();">
 			<span class="button__text">SCAN QR</span>
 			<span class="button__icon">
 				<ion-icon name="qr-code-outline"></ion-icon>
 			</span>
 		</button>
-	</div>
-	<div style="margin-top: 100px ; margin-left: 765px; ">
-		<button type="button" class="button">
+        
+      </div>
+      <div class="center-buttons">
+        <button type="button" class="button btn">
 			<span class="button__text">CONTACTS</span>
 			<span class="button__icon">
 				<ion-icon name="people-outline"></ion-icon>
 			</span>
 		</button>
-	</div>
+      </div>
+    </div>
+    <img src="img2.png" alt="Italian Trulli" style="width:100px;height:100px; margin-top:400px; margin-left: -40px;" >
 
-	<div style=" float: right;">
-		<button id="next_btn" type="button" class="button" style=" background: rgb(79, 79, 244);" onclick="next_btn_clicked();">
-			<span class="button__text">NEXT</span>
-			<span class="button__icon">
-				<ion-icon name="walk-outline"></ion-icon>
-			</span>
-		</button>
-	</div>
+</div>
 
-	<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-</body>
+    <button onclick="next_btn_clicked();"  class="btn bottom-right-btn" >NEXT</button>
 
-<script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+  </body>
+  <script>
 
 	var qr = document.getElementById('qr');
 	const input = document.querySelector('input');
@@ -100,8 +159,4 @@
 		 }
 	}
 </script>
-
 </html>
-
-
-<!-- location.href='pay.html' -->
