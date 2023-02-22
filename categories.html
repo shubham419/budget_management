@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,35 +7,34 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Categories</title>
   <!-- using font awesome for icons -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+    integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <!-- using google font -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet">
- 
+
 </head>
 <style>
-
-body {
+  body {
     font: 300 16px/1.5 'Roboto', sans-serif;
     color: #333;
     background: #e3e9ff;
   }
-  
+
   .container {
     margin: 0 auto;
     max-width: 640px;
     padding: 0 15px;
   }
-  
+
   h1 {
     font-size: 24px;
     font-weight: 300;
   }
-  
+
   p {
     margin: 0 0 15px;
   }
-  
+
   input[type="text"] {
     width: 100%;
     height: 58px;
@@ -46,12 +44,12 @@ body {
     font: 300 25px/1.5 'Roboto', sans-serif;
     transition: border 0.3s linear;
   }
-  
+
   input[type="text"]:focus {
     border-color: #4ac7be;
     outline: none;
   }
-  
+
   .btn-primary {
     background: #4ac7be;
     border: none;
@@ -65,15 +63,15 @@ body {
     font: 300 16px/1.5 'Roboto', sans-serif;
     transition: background 0.3s linear;
   }
-  
+
   .btn-primary:hover {
     background: #097fb7;
   }
-  
+
   .btn-primary:focus {
     outline: none;
   }
-  
+
   .btn-icon {
     background: none;
     border: none;
@@ -83,28 +81,28 @@ body {
     cursor: pointer;
     transition: background 0.3s linear, color 0.3s linear;
   }
-  
+
   .btn-icon:focus {
     outline: none;
   }
-  
+
   .btn-icon:before {
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
   }
-  
+
   .btn-icon.remove:before {
     content: '\f2ed';
   }
-  
+
   .btn-icon.down:before {
     content: '\f063';
   }
-  
+
   .btn-icon.up:before {
     content: '\f062';
   }
-  
+
   /* 
   todo block 
   ----------
@@ -115,11 +113,11 @@ body {
     background: #fff;
     box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.2);
   }
-  
+
   .todoBlock .titleHolder {
     margin: 0 0 30px;
   }
-  
+
   /* 
   list holder
   -----------
@@ -130,7 +128,7 @@ body {
     padding: 0 0 20px 30px;
     position: relative;
   }
-  
+
   .listHolder li:before {
     content: counter(step-counter);
     background: #4ac7be;
@@ -142,16 +140,16 @@ body {
     top: 0;
     left: 0;
   }
-  
+
   .listHolder .listName {
     float: left;
   }
-  
+
   .listHolder .btn-icon {
     float: right;
     margin: 0 0 0 20px;
   }
-  
+
   /* 
   form holder
   -----------
@@ -161,18 +159,18 @@ body {
     overflow: hidden;
     position: relative;
   }
-  
+
   .formHolder .col {
     float: left;
     width: 20%;
     padding: 0 5px;
   }
-  
+
   .formHolder .col.big {
     width: 60%;
   }
-
 </style>
+
 <body>
   <div class="container">
     <div class="todoBlock">
@@ -197,128 +195,128 @@ body {
         <!-- list holder -->
         <div class="listHolder">
           <ul class="list">
-        
+
           </ul>
         </div>
-        
+
       </div>
     </div>
   </div>
   <!-- importing custom js -->
   <script>
-const divList = document.querySelector('.listHolder');
-const addInput = document.querySelector('#addInput');
-const addBtn = document.querySelector('#addBtn');
+    const divList = document.querySelector('.listHolder');
+    const addInput = document.querySelector('#addInput');
+    const addBtn = document.querySelector('#addBtn');
 
-function addLists() {
-  if (addInput.value === '') {
-    alert('Enter the list name please!!!');
-  } else {
-    const ul = divList.querySelector('ul');
-    const li = document.createElement('li');
-    const span = document.createElement("SPAN");
-    span.className = 'listName';
-    span.innerHTML = addInput.value;
-    li.appendChild(span);
-    // li.innerHTML = addInput.value;
-    addInput.value = '';
-    ul.appendChild(li);
-    createBtn(li);
-  }
-}
-
-// add list when clicked on add item button
-addBtn.addEventListener('click', () => {
-  addLists();
-});
-
-// add list when pressed enter
-addInput.addEventListener('keyup', (event) => {
-  if(event.which === 13) {
-    addLists();
-  }
-});
-
-/* 
-3. create action buttons
-------------------------
-*/
-// create variables
-const listUl = document.querySelector('.list');
-const lis = listUl.children;
-
-function createBtn(li) {
-  // create remove button
-  const remove = document.createElement('button');
-  remove.className = 'btn-icon remove';
-  li.appendChild(remove);
-
-  // create down button
-  const down = document.createElement('button');
-  down.className = 'btn-icon down';
-  li.appendChild(down);
-
-  // create up button
-  const up = document.createElement('button');
-  up.className = 'btn-icon up';
-  li.appendChild(up);
-
-  return li;
-}
-
-// loop to add buttons in each li
-for (var i = 0; i < lis.length; i++) {
-  createBtn(lis[i]);
-}
-
-
-/* 
-4. enabling button actions (to move item up, down or delete)
-------------------------------------------------------------
-*/
-divList.addEventListener('click', (event) => {
-  if (event.target.tagName === 'BUTTON') {
-    const button = event.target;
-    const li = button.parentNode;
-    const ul = li.parentNode;
-    if (button.className === 'btn-icon remove') {
-      ul.removeChild(li);
-    } else if (button.className === 'btn-icon down') {
-      const nextLi = li.nextElementSibling;
-      if (nextLi) {
-        ul.insertBefore(nextLi, li);
-      }
-    } else if (button.className === 'btn-icon up') {
-      const prevLi = li.previousElementSibling;
-      if (prevLi) {
-        ul.insertBefore(li, prevLi);
+    function addLists() {
+      if (addInput.value === '') {
+        alert('Enter the list name please!!!');
+      } else {
+        const ul = divList.querySelector('ul');
+        const li = document.createElement('li');
+        const span = document.createElement("SPAN");
+        span.className = 'listName';
+        span.innerHTML = addInput.value;
+        li.appendChild(span);
+        // li.innerHTML = addInput.value;
+        addInput.value = '';
+        ul.appendChild(li);
+        createBtn(li);
       }
     }
-  }
-});
+
+    // add list when clicked on add item button
+    addBtn.addEventListener('click', () => {
+      addLists();
+    });
+
+    // add list when pressed enter
+    addInput.addEventListener('keyup', (event) => {
+      if (event.which === 13) {
+        addLists();
+      }
+    });
+
+    /* 
+    3. create action buttons
+    ------------------------
+    */
+    // create variables
+    const listUl = document.querySelector('.list');
+    const lis = listUl.children;
+
+    function createBtn(li) {
+      // create remove button
+      const remove = document.createElement('button');
+      remove.className = 'btn-icon remove';
+      li.appendChild(remove);
+
+      // create down button
+      const down = document.createElement('button');
+      down.className = 'btn-icon down';
+      li.appendChild(down);
+
+      // create up button
+      const up = document.createElement('button');
+      up.className = 'btn-icon up';
+      li.appendChild(up);
+
+      return li;
+    }
+
+    // loop to add buttons in each li
+    for (var i = 0; i < lis.length; i++) {
+      createBtn(lis[i]);
+    }
+
+
+    /* 
+    4. enabling button actions (to move item up, down or delete)
+    ------------------------------------------------------------
+    */
+    divList.addEventListener('click', (event) => {
+      if (event.target.tagName === 'BUTTON') {
+        const button = event.target;
+        const li = button.parentNode;
+        const ul = li.parentNode;
+        if (button.className === 'btn-icon remove') {
+          ul.removeChild(li);
+        } else if (button.className === 'btn-icon down') {
+          const nextLi = li.nextElementSibling;
+          if (nextLi) {
+            ul.insertBefore(nextLi, li);
+          }
+        } else if (button.className === 'btn-icon up') {
+          const prevLi = li.previousElementSibling;
+          if (prevLi) {
+            ul.insertBefore(li, prevLi);
+          }
+        }
+      }
+    });
 
   </script>
 </body>
 
 <script type="module">
- // Import the functions you need from the SDKs you need
+  // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-  import { getDatabase, set, child , ref, update, get } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+  import { getDatabase, set, child, ref, update, get } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
   // TODO: Add SDKs for Firebase products that you want to use
 
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
-  apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
-  authDomain: "budget-management-6b80f.firebaseapp.com",
-  databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
-  projectId: "budget-management-6b80f",
-  storageBucket: "budget-management-6b80f.appspot.com",
-  messagingSenderId: "190001410215",
-  appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
-  measurementId: "G-TS3P5XEB13"
-};
+    apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
+    authDomain: "budget-management-6b80f.firebaseapp.com",
+    databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
+    projectId: "budget-management-6b80f",
+    storageBucket: "budget-management-6b80f.appspot.com",
+    messagingSenderId: "190001410215",
+    appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
+    measurementId: "G-TS3P5XEB13"
+  };
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
@@ -328,45 +326,44 @@ divList.addEventListener('click', (event) => {
   const db = getDatabase();
 
 
-    function getallDattaOnce(){
-      const dbRef = ref(db);
-      var category = [];
+  function getallDattaOnce() {
+    const dbRef = ref(db);
+    var category = [];
 
-      get (child(dbRef, "categories"))
-      .then((snapshot)=>{
+    get(child(dbRef, "categories"))
+      .then((snapshot) => {
 
-       snapshot.forEach(childSnapshot =>{
-        category.push(childSnapshot.val());
-      }); 
-      loadDataInList(category);
-    });
+        snapshot.forEach(childSnapshot => {
+          category.push(childSnapshot.val());
+        });
+        loadDataInList(category);
+      });
 
+  }
+
+  //const toggleBtn = document.querySelector('#toggleBtn');
+  toggleBtn.addEventListener('click', () => {
+    alert('Categories Updated');
+
+    var list = document.getElementsByClassName('listName');
+    var listArray = [];
+    for (var i = 0; i < list.length; i++) {
+      listArray.push(list[i].innerHTML);
     }
 
-//const toggleBtn = document.querySelector('#toggleBtn');
-toggleBtn.addEventListener('click', () => {
-  alert('Categories Updated');
+    set(ref(database, 'categories/'), {
+      categoryList: listArray
+    })
+  });
 
-  var list = document.getElementsByClassName('listName');
-  var listArray=[];
-  for (var i=0;i<list.length;i++){
-    listArray.push(list[i].innerHTML);
-   }
+  function loadDataInList(category) {
 
-  set(ref(database, 'categories/'),{
-         categoryList: listArray
-      })
-}); 
-
-   function loadDataInList(category){
- 
     const divList = document.querySelector('.listHolder');
     const ul = divList.querySelector('ul');
 
-    for (var i = 0; i < category[0].length; i++)
-     {
-    
-      const li = document.createElement('li'); 
+    for (var i = 0; i < category[0].length; i++) {
+
+      const li = document.createElement('li');
       const span = document.createElement("SPAN");
       // li.classList.add("listName");s
       span.className = 'listName';
@@ -375,31 +372,31 @@ toggleBtn.addEventListener('click', () => {
       ul.appendChild(li);
       createBtn(li);
       // console.log(category[0][i]); 
-     }
+    }
     //  console.log(category);
 
-   }
+  }
 
-   function createBtn(li) {
-  // create remove button
-  const remove = document.createElement('button');
-  remove.className = 'btn-icon remove';
-  li.appendChild(remove);
+  function createBtn(li) {
+    // create remove button
+    const remove = document.createElement('button');
+    remove.className = 'btn-icon remove';
+    li.appendChild(remove);
 
-  // create down button
-  const down = document.createElement('button');
-  down.className = 'btn-icon down';
-  li.appendChild(down);
+    // create down button
+    const down = document.createElement('button');
+    down.className = 'btn-icon down';
+    li.appendChild(down);
 
-  // create up button
-  const up = document.createElement('button');
-  up.className = 'btn-icon up';
-  li.appendChild(up);
+    // create up button
+    const up = document.createElement('button');
+    up.className = 'btn-icon up';
+    li.appendChild(up);
 
-  return li;
-}
+    return li;
+  }
 
-   window.onload = getallDattaOnce;
+  window.onload = getallDattaOnce;
 
 </script>
 

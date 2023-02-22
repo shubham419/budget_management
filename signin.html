@@ -1,39 +1,204 @@
 <html>
+
 <head>
-<title>sign in</title>
-<link rel="stylesheet" href="cssFile.css">
+  <title>sign in</title>
+  <link rel="stylesheet" href="cssFile.css">
 </head>
+<style>
+  /*@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);*/
+  *:focus {
+    outline: none;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: #DDD;
+    font-size: 16px;
+    color: #222;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+  }
+
+  #login-box {
+    position: relative;
+    margin: 5% auto;
+    width: 600px;
+    height: 600px;
+    background: #FFF;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 300px;
+    height: 400px;
+  }
+
+  h1 {
+    margin: 0 0 20px 0;
+    font-weight: 300;
+    font-size: 28px;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 220px;
+    height: 32px;
+    border: none;
+    border-bottom: 1px solid #AAA;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-bottom: 2px solid #16a085;
+    color: #16a085;
+    transition: 0.2s ease;
+  }
+
+  input[type="submit"] {
+    margin-top: 28px;
+    width: 120px;
+    height: 32px;
+    background: #16a085;
+    border: none;
+    border-radius: 2px;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: 0.1s ease;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover,
+  input[type="submit"]:focus {
+    opacity: 0.8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
+  }
+
+  input[type="submit"]:active {
+    opacity: 1;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
+  }
+
+  .or {
+    position: absolute;
+    top: 180px;
+    left: 280px;
+    width: 40px;
+    height: 40px;
+    background: #DDD;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    line-height: 40px;
+    text-align: center;
+  }
+
+  .right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 300px;
+    height: 400px;
+    background: url('https://goo.gl/YbktSj');
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .right .loginwith {
+    display: block;
+    margin-bottom: 40px;
+    font-size: 28px;
+    color: #FFF;
+    text-align: center;
+  }
+
+  button.social-signin {
+    margin-bottom: 20px;
+    width: 220px;
+    height: 36px;
+    border: none;
+    border-radius: 2px;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    transition: 0.2s ease;
+    cursor: pointer;
+  }
+
+  button.social-signin:hover,
+  button.social-signin:focus {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: 0.2s ease;
+  }
+
+  button.social-signin:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    transition: 0.2s ease;
+  }
+
+  button.social-signin.facebook {
+    background: #32508E;
+  }
+
+  button.social-signin.twitter {
+    background: #55ACEE;
+  }
+
+  button.social-signin.google {
+    background: #DD4B39;
+  }
+</style>
 
 <body>
-  
-<div id="login-box">
-  <div class="left">
-    <div>
-    <h1 id='status'>Sign in</h1>
-    <input type="text" id = "username" name = "username" placeholder="Firstname" />
-    <input type="text" id = "Middlename" name = "username" placeholder="Middlename" />
-    <input type="text" id = "Lastname" name = "username" placeholder="Lastname" />
-    <input type="text" id = "phone" name = "username" placeholder="phone no." />
-    <input type="text" id = "Address" name = "username" placeholder="Current Address" />
-    <input type="text" id="email" name="email" placeholder="E-mail" />
-    <input type="password" id="password" name="password" placeholder="Password" />
-    
-    <input type="submit" id='sighUp' name="sighUp" value="Signin" />
+
+  <div id="login-box">
+    <div class="left">
+      <div>
+        <h1 id='status'>Sign in</h1>
+        <input type="text" id="username" name="username" placeholder="Firstname" />
+        <input type="text" id="Middlename" name="username" placeholder="Middlename" />
+        <input type="text" id="Lastname" name="username" placeholder="Lastname" />
+        <input type="text" id="phone" name="username" placeholder="phone no." />
+        <input type="text" id="Address" name="username" placeholder="Current Address" />
+        <input type="text" id="email" name="email" placeholder="E-mail" />
+        <input type="password" id="password" name="password" placeholder="Password" />
+
+        <input type="submit" id='sighUp' name="sighUp" value="Signin" />
+      </div>
+      <div>
+        <h5 onclick="openPage('signup.html')" style="cursor: pointer;">already have account?</h5>
+      </div>
+    </div>
+
+    <div class="right" style="margin-top: 100px;">
+      <span class="loginwith">Sign in with<br />social network</span>
+
+      <button class="social-signin facebook">Log in with facebook</button>
+      <button class="social-signin twitter">Log in with Twitter</button>
+      <button class="social-signin google">Log in with Google+</button>
+    </div>
+    <div class="or" style="margin-top: 100px;">OR</div>
   </div>
-  <div>
-    <h5  onclick="openPage('signup.html')" style="cursor: pointer;">already have account?</h5>
-  </div>
-  </div>
-  
-  <div class="right" style="margin-top: 100px;">
-    <span class="loginwith">Sign in with<br />social network</span>
-    
-    <button class="social-signin facebook">Log in with facebook</button>
-    <button class="social-signin twitter">Log in with Twitter</button>
-    <button class="social-signin google">Log in with Google+</button>
-  </div>
-  <div class="or" style="margin-top: 100px;">OR</div>
-</div>
 </body>
 <script>
   function openPage(url) {
@@ -50,39 +215,39 @@
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
-  apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
-  authDomain: "budget-management-6b80f.firebaseapp.com",
-  databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
-  projectId: "budget-management-6b80f",
-  storageBucket: "budget-management-6b80f.appspot.com",
-  messagingSenderId: "190001410215",
-  appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
-  measurementId: "G-TS3P5XEB13"
+    apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
+    authDomain: "budget-management-6b80f.firebaseapp.com",
+    databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
+    projectId: "budget-management-6b80f",
+    storageBucket: "budget-management-6b80f.appspot.com",
+    messagingSenderId: "190001410215",
+    appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
+    measurementId: "G-TS3P5XEB13"
 
-};
+  };
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
   const auth = getAuth();
 
-sighUp.addEventListener('click',(e) => {
+  sighUp.addEventListener('click', (e) => {
 
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
-  var username = document.getElementById('username').value;
-  var Middlename = document.getElementById('Middlename').value;
-  var Lastname = document.getElementById('Lastname').value;
-  var phone = document.getElementById('phone').value;
-  var Address = document.getElementById('Address').value;
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var username = document.getElementById('username').value;
+    var Middlename = document.getElementById('Middlename').value;
+    var Lastname = document.getElementById('Lastname').value;
+    var phone = document.getElementById('phone').value;
+    var Address = document.getElementById('Address').value;
 
 
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-     // Signed in 
-      const user = userCredential.user;
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
 
-      set(ref(database, 'users/' + user.uid),{
+        set(ref(database, 'users/' + user.uid), {
           firstname: username,
           Middlename: Middlename,
           Lastname: Lastname,
@@ -90,23 +255,23 @@ sighUp.addEventListener('click',(e) => {
           Address: Address,
           email: email,
           password: password
+        })
+
+        alert('user created!');
+        openPage('index.html')
+
       })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
 
-      alert('user created!');
-      openPage('index.html')
+        alert(errorMessage);
+        // ..
+      });
 
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+  });
 
-      alert(errorMessage);
-    // ..
-    });
 
-});
-
- 
 </script>
 
 </html>
