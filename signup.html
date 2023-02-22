@@ -12,7 +12,7 @@
     <input type="text" id="email" name="email" placeholder="E-mail" />
     <input type="password" id="password" name="password" placeholder="Password" />
     
-    <input type="submit" id='logIn' name="login" value="login" />
+    <input type="submit" id='logIn' name="login" value="login" onclick="openPage('index.html')"/>
     <div>
       <h5  onclick="openPage('signin.html')" style="cursor:pointer; " >create new account</h5>
     </div>
@@ -33,7 +33,7 @@
     window.open(url, "_self");
   }
 </script>
-<script type="module">
+<!-- <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
   import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
@@ -80,7 +80,7 @@ logIn.addEventListener('click',(e)=>{
   });
  });
 
-</script>
+</script> -->
 
 </html>
 

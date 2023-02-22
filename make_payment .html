@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	.button {
+		display: flex;
+		height: 100px;
+		padding: 0;
+		background: #009578;
+		border: none;
+		outline: none;
+		border-radius: 5px;
+		overflow: hidden;
+		font-family: "Quicksand", sans-serif;
+		font-size: 16px;
+		font-weight: 500;
+		cursor: pointer;
+	}
+
+	.button:hover {
+		background: #008168;
+	}
+
+	.button:active {
+		background: #006e58;
+	}
+
+	.button__text,
+	.button__icon {
+		display: inline-flex;
+		align-items: center;
+		padding: 0 24px;
+		color: #fff;
+		height: 100%;
+	}
+
+	.button__icon {
+		font-size: 1.5em;
+		background: rgba(0, 0, 0, 0.08);
+	}
+</style>
+
+<body style="background-color: rgb(217,217,217);">
+
+	<form style="visibility: hidden;">
+		<input id="qr" type="file">
+	</form>
+
+	<div style="margin-top: 300px ; margin-left: 750px; ">
+		<button type="button" class="button" onclick="qr_selected();">
+			<span class="button__text">SCAN QR</span>
+			<span class="button__icon">
+				<ion-icon name="qr-code-outline"></ion-icon>
+			</span>
+		</button>
+	</div>
+	<div style="margin-top: 100px ; margin-left: 765px; ">
+		<button type="button" class="button">
+			<span class="button__text">CONTACTS</span>
+			<span class="button__icon">
+				<ion-icon name="people-outline"></ion-icon>
+			</span>
+		</button>
+	</div>
+
+	<div style=" float: right;">
+		<button id="next_btn" type="button" class="button" style=" background: rgb(79, 79, 244);" onclick="next_btn_clicked();">
+			<span class="button__text">NEXT</span>
+			<span class="button__icon">
+				<ion-icon name="walk-outline"></ion-icon>
+			</span>
+		</button>
+	</div>
+
+	<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</body>
+
+<script>
+
+	var qr = document.getElementById('qr');
+	const input = document.querySelector('input');
+
+	function qr_selected() {
+		qr.click();
+	}
+
+	function next_btn_clicked(){
+		const curFiles = input.files;
+         if(curFiles.length === 0){
+			alert("Please Scan QR");
+			return
+		 }else{
+			window.open('pay.html',"_self");
+		 }
+	}
+</script>
+
+</html>
+
+
+<!-- location.href='pay.html' -->

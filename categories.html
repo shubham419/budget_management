@@ -12,11 +12,167 @@
     crossorigin="anonymous">
   <!-- using google font -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet">
-  <!-- importing reset and main css -->
-  <link rel="stylesheet" href="reset.css">
-  <link rel="stylesheet" href="main.css">
+ 
 </head>
+<style>
 
+body {
+    font: 300 16px/1.5 'Roboto', sans-serif;
+    color: #333;
+    background: #e3e9ff;
+  }
+  
+  .container {
+    margin: 0 auto;
+    max-width: 640px;
+    padding: 0 15px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    font-weight: 300;
+  }
+  
+  p {
+    margin: 0 0 15px;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    height: 58px;
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 10px;
+    font: 300 25px/1.5 'Roboto', sans-serif;
+    transition: border 0.3s linear;
+  }
+  
+  input[type="text"]:focus {
+    border-color: #4ac7be;
+    outline: none;
+  }
+  
+  .btn-primary {
+    background: #4ac7be;
+    border: none;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    cursor: pointer;
+    font: 300 16px/1.5 'Roboto', sans-serif;
+    transition: background 0.3s linear;
+  }
+  
+  .btn-primary:hover {
+    background: #097fb7;
+  }
+  
+  .btn-primary:focus {
+    outline: none;
+  }
+  
+  .btn-icon {
+    background: none;
+    border: none;
+    display: inline-block;
+    vertical-align: top;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.3s linear, color 0.3s linear;
+  }
+  
+  .btn-icon:focus {
+    outline: none;
+  }
+  
+  .btn-icon:before {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+  }
+  
+  .btn-icon.remove:before {
+    content: '\f2ed';
+  }
+  
+  .btn-icon.down:before {
+    content: '\f063';
+  }
+  
+  .btn-icon.up:before {
+    content: '\f062';
+  }
+  
+  /* 
+  todo block 
+  ----------
+  */
+  .todoBlock {
+    padding: 30px;
+    margin: 30px 0;
+    background: #fff;
+    box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .todoBlock .titleHolder {
+    margin: 0 0 30px;
+  }
+  
+  /* 
+  list holder
+  -----------
+  */
+  .listHolder li {
+    counter-increment: step-counter;
+    overflow: hidden;
+    padding: 0 0 20px 30px;
+    position: relative;
+  }
+  
+  .listHolder li:before {
+    content: counter(step-counter);
+    background: #4ac7be;
+    color: #fff;
+    font-size: 14px;
+    padding: 0px 6px;
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .listHolder .listName {
+    float: left;
+  }
+  
+  .listHolder .btn-icon {
+    float: right;
+    margin: 0 0 0 20px;
+  }
+  
+  /* 
+  form holder
+  -----------
+  */
+  .formHolder {
+    margin: 0 -5px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .formHolder .col {
+    float: left;
+    width: 20%;
+    padding: 0 5px;
+  }
+  
+  .formHolder .col.big {
+    width: 60%;
+  }
+
+</style>
 <body>
   <div class="container">
     <div class="todoBlock">
@@ -49,7 +205,99 @@
     </div>
   </div>
   <!-- importing custom js -->
-  <script src="main.js"></script>
+  <script>
+const divList = document.querySelector('.listHolder');
+const addInput = document.querySelector('#addInput');
+const addBtn = document.querySelector('#addBtn');
+
+function addLists() {
+  if (addInput.value === '') {
+    alert('Enter the list name please!!!');
+  } else {
+    const ul = divList.querySelector('ul');
+    const li = document.createElement('li');
+    const span = document.createElement("SPAN");
+    span.className = 'listName';
+    span.innerHTML = addInput.value;
+    li.appendChild(span);
+    // li.innerHTML = addInput.value;
+    addInput.value = '';
+    ul.appendChild(li);
+    createBtn(li);
+  }
+}
+
+// add list when clicked on add item button
+addBtn.addEventListener('click', () => {
+  addLists();
+});
+
+// add list when pressed enter
+addInput.addEventListener('keyup', (event) => {
+  if(event.which === 13) {
+    addLists();
+  }
+});
+
+/* 
+3. create action buttons
+------------------------
+*/
+// create variables
+const listUl = document.querySelector('.list');
+const lis = listUl.children;
+
+function createBtn(li) {
+  // create remove button
+  const remove = document.createElement('button');
+  remove.className = 'btn-icon remove';
+  li.appendChild(remove);
+
+  // create down button
+  const down = document.createElement('button');
+  down.className = 'btn-icon down';
+  li.appendChild(down);
+
+  // create up button
+  const up = document.createElement('button');
+  up.className = 'btn-icon up';
+  li.appendChild(up);
+
+  return li;
+}
+
+// loop to add buttons in each li
+for (var i = 0; i < lis.length; i++) {
+  createBtn(lis[i]);
+}
+
+
+/* 
+4. enabling button actions (to move item up, down or delete)
+------------------------------------------------------------
+*/
+divList.addEventListener('click', (event) => {
+  if (event.target.tagName === 'BUTTON') {
+    const button = event.target;
+    const li = button.parentNode;
+    const ul = li.parentNode;
+    if (button.className === 'btn-icon remove') {
+      ul.removeChild(li);
+    } else if (button.className === 'btn-icon down') {
+      const nextLi = li.nextElementSibling;
+      if (nextLi) {
+        ul.insertBefore(nextLi, li);
+      }
+    } else if (button.className === 'btn-icon up') {
+      const prevLi = li.previousElementSibling;
+      if (prevLi) {
+        ul.insertBefore(li, prevLi);
+      }
+    }
+  }
+});
+
+  </script>
 </body>
 
 <script type="module">
