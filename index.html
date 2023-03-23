@@ -16,6 +16,9 @@
     line-height: 75px;
     font-size: 30px;
     font-weight: bold;
+    border-style: solid;
+    border-width: thin;
+    border-color: #E02130;
     border-radius: 100px;
     overflow: hidden;
   }
@@ -67,17 +70,33 @@
   }
 </style>
 
-<body style="margin: 0%; ">
+<body style="margin: 0%;">
 
-  <div style="background-color: rgb(217, 217, 217);">
-    <small
+  <div style="background-color: #E02130; display: flex;">
+    <!-- <small
       style="text-align: center; font-family: sans-serif; font-size: 4.2vw; padding-top: 5vw; display: block;">Efficient
       way</small>
     <h1 style="text-align: center; font-family: sans-serif; font-size: 4.2vw; padding-bottom: 11vw; margin-top: -2px;">
-      to manage your budget</h1>
-  </div>
+      to manage your budget</h1> -->
+      <div style=" flex: 1; width: fit-content;  margin-left: 160px; padding-top:100px; ">
+        <small
+          style="text-align: left; font-family: 'Raleway', sans-serif; font-size: 3.2vw; color: #FFF; font-weight: 10; ">EFFICIENT WAY TO</small>
+        <h1 style="text-align: left; font-family: 'Raleway', sans-serif; font-size: 3.2vw; color: #FFF; margin-top: 1px; font-weight: 900;">
+            MANAGE YOUR BUDGET</h1>
 
-  <div class="flex-container" style="display: flex;  flex-direction: row; margin-top: -160px; ">
+
+        <p style="color: #FFABAB;">It is a simple yet effective method for managing all of your transactions.</p>
+
+        <h3 style="font-weight: 100; font-size: 25px; color: #FFF; display: block; border-style: solid; width: fit-content; padding: 10px; border-width: thin; margin-top: 100px; cursor: pointer;">Know more</h3>
+
+      </div>
+      <div style="width: fit-content; margin: 50px;  margin-right: 200px;">
+        <img src="img.png">
+      </div>
+  </div>
+  
+
+  <div class="flex-container" style="display: flex;  flex-direction: row; margin-top: -90px; ">
     <div class="item">
       <div><small onclick="openPage('make_payment.html')"
           style="margin-top: -10px; cursor:pointer;  font-weight: bold; font-size: 28px;">Make New Payment</small></div>
@@ -97,6 +116,13 @@
           style="margin-top: -10px; cursor:pointer;  font-weight: bold; font-size: 28px;">Analysis</small></div>
       <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">analysis of your monthly
           budget</small></div>
+    </div>
+
+    <div class="item">
+      <div><small onclick="openPage('payment_history.html')"
+          style="margin-top: -10px; cursor:pointer;  font-weight: bold; font-size: 28px;">Transactions</small></div>
+      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">
+          see your payment history</small></div>
     </div>
 
   </div>
