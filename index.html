@@ -1,83 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Home</title>
 </head>
-<style>
-  .item {
-    background-color: #ffffff;
-    width: 700px;
-    margin: 50px;
-    text-align: center;
-    line-height: 75px;
-    font-size: 30px;
-    font-weight: bold;
-    border-style: solid;
-    border-width: thin;
-    border-color: #E02130;
-    border-radius: 100px;
-    overflow: hidden;
-  }
-
-  .card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    margin: auto;
-    padding: 20px;
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
-  }
-
-  form {
-    margin-top: 20px;
-    text-align: left;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-
-  input[type="text"],
-  select,
-  textarea {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-  }
-
-  input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  input[type="submit"]:hover {
-    background-color: #45a049;
-  }
-</style>
 
 <body style="margin: 0%;">
 
   <div style="background-color: #E02130; display: flex;">
-    <!-- <small
-      style="text-align: center; font-family: sans-serif; font-size: 4.2vw; padding-top: 5vw; display: block;">Efficient
-      way</small>
-    <h1 style="text-align: center; font-family: sans-serif; font-size: 4.2vw; padding-bottom: 11vw; margin-top: -2px;">
-      to manage your budget</h1> -->
       <div style=" flex: 1; width: fit-content;  margin-left: 160px; padding-top:100px; ">
         <small
           style="text-align: left; font-family: 'Raleway', sans-serif; font-size: 3.2vw; color: #FFF; font-weight: 10; ">EFFICIENT WAY TO</small>
@@ -94,61 +26,84 @@
         <img src="img.png">
       </div>
   </div>
+
+   <div style="text-align: center; font-size: 38px; color: #222222; font-family: 'Raleway', sans-serif; margin-top: 50px; font-weight: 10;">SERVICES</div>
   
+<div style=" justify-content: center; align-items: center; margin: auto;" >
+      <div style="display: flex; justify-content: center; align-items: center; margin: auto;">
 
-  <div class="flex-container" style="display: flex;  flex-direction: row; margin-top: -90px; ">
-    <div class="item">
-      <div><small onclick="openPage('make_payment.html')"
-          style="margin-top: -10px; cursor:pointer;  font-weight: bold; font-size: 28px;">Make New Payment</small></div>
-      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">easily send money to your
-          contact and business</small></div>
+      <div style="text-align: center; margin: 50px;">
+        <div style="display: inline-block; text-align: center;">
+          <img src="ic_new_payment.png" width="100" height="100" onclick="openPage('make_payment.html')">
+          <div style="font-size: 18px; color: #111111; font-family: 'Raleway', sans-serif; margin-top: 10px; font-weight: 600;">Make New Payment</div>
+          <div style="font-size: 16px; color: #888888; font-family: 'Open Sans', sans-serif; margin-top: 10px;">Send money to your contacts and businesses<br/>with ease and security.</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin: 50px;">
+        <div style="display: inline-block; text-align: center;">
+          <img src="ic_categories.png" width="100" height="100" onclick="openPage('categories.html')">
+          <div style="font-size: 18px; color: #111111; font-family: 'Raleway', sans-serif; margin-top: 10px; font-weight: 600;">Categories</div>
+          <div style="font-size: 16px; color: #888888; font-family: 'Open Sans', sans-serif; margin-top: 10px;">Manage your expense categories.</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin: 50px;">
+        <div style="display: inline-block; text-align: center;">
+          <img src="ic_analytic.png" width="100" height="100" onclick="openPage('Analysis.html')">
+          <div style="font-size: 18px; color: #111111; font-family: 'Raleway', sans-serif; margin-top: 10px; font-weight: 600;">Analysis</div>
+          <div style="font-size: 16px; color: #888888; font-family: 'Open Sans', sans-serif; margin-top: 10px;">Analysis of your monthly budget</div>
+        </div>
+      </div>
     </div>
+    
 
-    <div class="item">
-      <div><small onclick="openPage('categories.html')"
-          style="margin-top: -10px; cursor:pointer;  font-weight: bold; font-size: 28px;">Categories</small></div>
-      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">manage your expenses
-          categorie</small></div>
+    <div style="display: flex; justify-content: center; align-items: center; margin: auto;">
+
+      <div style="text-align: center; margin: 50px;">
+        <div style="display: inline-block; text-align: center;">
+          <img src="ic_transaction.png" width="100" height="100" onclick="openPage('payment_history.html')">
+          <div style="font-size: 18px; color: #111111; font-family: 'Raleway', sans-serif; margin-top: 10px; font-weight: 600;">Transactions</div>
+          <div style="font-size: 16px; color: #888888; font-family: 'Open Sans', sans-serif; margin-top: 10px;">see your payment history</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin: 50px;">
+        <div style="display: inline-block; text-align: center;">
+          <img src="ic_goals.png" width="100" height="100" onclick="openPage('goals.html')">
+          <div style="font-size: 18px; color: #111111; font-family: 'Raleway', sans-serif; margin-top: 10px; font-weight: 600;">Goals</div>
+          <div style="font-size: 16px; color: #888888; font-family: 'Open Sans', sans-serif; margin-top: 10px;">Creat new goals and save money</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin: 50px;">
+        <div style="display: inline-block; text-align: center;">
+          <img src="ic_planed_payment.png" width="100" height="100" onclick="openPage('planed_payment.html')">
+          <div style="font-size: 18px; color: #111111; font-family: 'Raleway', sans-serif; margin-top: 10px; font-weight: 600;">Planed Payment</div>
+          <div style="font-size: 16px; color: #888888; font-family: 'Open Sans', sans-serif; margin-top: 10px;">Manage your emi with </div>
+        </div>
+      </div>
     </div>
-
-    <div class="item">
-      <div><small onclick="openPage('Analysis.html')"
-          style="margin-top: -10px; cursor:pointer;  font-weight: bold; font-size: 28px;">Analysis</small></div>
-      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">analysis of your monthly
-          budget</small></div>
-    </div>
-
-    <div class="item">
-      <div><small onclick="openPage('payment_history.html')"
-          style="margin-top: -10px; cursor:pointer;  font-weight: bold; font-size: 28px;">Transactions</small></div>
-      <div><small style="margin-top: -10px; color: rgb(99, 95, 95); font-weight: normal; ">
-          see your payment history</small></div>
-    </div>
-
   </div>
-  <div class="card">
-    <h2>Feedback Form</h2>
-    <form>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" placeholder="Enter your name">
 
-      <label for="email">Email:</label>
-      <input type="text" id="email" name="email" placeholder="Enter your email">
+  <div>
 
-      <label for="feedback">Feedback:</label>
-      <select id="feedback" name="feedback">
-        <option value="general">General feedback</option>
-        <option value="bug">Report a bug</option>
-        <option value="feature">Request a feature</option>
-        <option value="other">Other</option>
-      </select>
-
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" placeholder="Enter your feedback"></textarea>
-
-      <input type="submit" value="Submit">
-    </form>
+    <div style="background-color: #000; width: 100%; padding: 50px 0;">
+      <form style="max-width: 500px; margin: 0 auto; font-family: Arial, sans-serif;">
+        <h1 style="text-align: center; margin-bottom: 20px; color: #fff;">Feedback Form</h1>
+        <label for="name" style="display: block; font-size: 16px; font-weight: bold; margin-bottom: 5px; color: #fff;">Name:</label>
+        <input type="text" id="name" name="name" required style="padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; width: 100%; margin-bottom: 20px;">
+        <label for="email" style="display: block; font-size: 16px; font-weight: bold; margin-bottom: 5px; color: #fff;">Email:</label>
+        <input type="email" id="email" name="email" required style="padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; width: 100%; margin-bottom: 20px;">
+        <label for="feedback" style="display: block; font-size: 16px; font-weight: bold; margin-bottom: 5px; color: #fff;">Feedback:</label>
+        <textarea id="feedback" name="feedback" required style="padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; width: 100%; height: 150px; margin-bottom: 20px;"></textarea>
+        <button type="submit" style="padding: 10px 20px; background-color: #fff; color: #000; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Submit</button>
+      </form>
+    </div>
+    
   </div>
+
+
 
 </body>
 <script>
