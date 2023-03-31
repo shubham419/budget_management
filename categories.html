@@ -46,12 +46,12 @@
   }
 
   input[type="text"]:focus {
-    border-color: #4ac7be;
+    border-color: #E02130;
     outline: none;
   }
 
   .btn-primary {
-    background: #4ac7be;
+    background: #E02130;
     border: none;
     padding: 10px;
     display: inline-block;
@@ -61,11 +61,10 @@
     color: #fff;
     cursor: pointer;
     font: 300 16px/1.5 'Roboto', sans-serif;
-    transition: background 0.3s linear;
   }
 
   .btn-primary:hover {
-    background: #097fb7;
+    background: #fe1428;
   }
 
   .btn-primary:focus {
@@ -79,7 +78,6 @@
     vertical-align: top;
     color: #333;
     cursor: pointer;
-    transition: background 0.3s linear, color 0.3s linear;
   }
 
   .btn-icon:focus {
@@ -131,7 +129,7 @@
 
   .listHolder li:before {
     content: counter(step-counter);
-    background: #4ac7be;
+    background: #E02130;
     color: #fff;
     font-size: 14px;
     padding: 0px 6px;
@@ -195,7 +193,6 @@
         <!-- list holder -->
         <div class="listHolder">
           <ul class="list">
-
           </ul>
         </div>
 
@@ -208,39 +205,6 @@
     const addInput = document.querySelector('#addInput');
     const addBtn = document.querySelector('#addBtn');
 
-    function addLists() {
-
-
-
-
-      // if (addInput.value === '') {
-      //   alert('Enter the list name please!!!');
-      // } else {
-      //   const ul = divList.querySelector('ul');
-      //   const li = document.createElement('li');
-      //   const span = document.createElement("SPAN");
-      //   span.className = 'listName';
-      //   span.innerHTML = addInput.value;
-      //   li.appendChild(span);
-      //   // li.innerHTML = addInput.value;
-      //   addInput.value = '';
-      //   ul.appendChild(li);
-      //   createBtn(li);
-      // }
-    }
-
-    // add list when clicked on add item button
-    // addBtn.addEventListener('click', () => {
-    //   addLists();
-    // });
-
-    // add list when pressed enter
-    addInput.addEventListener('keyup', (event) => {
-      if (event.which === 13) {
-        addLists();
-      }
-    });
-
     /* 
     3. create action buttons
     ------------------------
@@ -251,20 +215,12 @@
 
     function createBtn(li) {
       // create remove button
-      const remove = document.createElement('button');
+      const remove = document.createElement('img');
+      remove.src = "ic_delete.png";
+      remove.style.height = "22px"
+      remove.style.width = "22px"
       remove.className = 'btn-icon remove';
       li.appendChild(remove);
-
-      // create down button
-      const down = document.createElement('button');
-      down.className = 'btn-icon down';
-      li.appendChild(down);
-
-      // create up button
-      const up = document.createElement('button');
-      up.className = 'btn-icon up';
-      li.appendChild(up);
-
       return li;
     }
 
@@ -273,165 +229,134 @@
       createBtn(lis[i]);
     }
 
-
-    /* 
-    4. enabling button actions (to move item up, down or delete)
-    ------------------------------------------------------------
-    */
     divList.addEventListener('click', (event) => {
-      if (event.target.tagName === 'BUTTON') {
+      if (event.target.tagName === 'IMG') {
         const button = event.target;
         const li = button.parentNode;
         const ul = li.parentNode;
+        const listTitle = li.innerText;
+
+        removeData(listTitle)
         if (button.className === 'btn-icon remove') {
           ul.removeChild(li);
-        } else if (button.className === 'btn-icon down') {
-          const nextLi = li.nextElementSibling;
-          if (nextLi) {
-            ul.insertBefore(nextLi, li);
-          }
-        } else if (button.className === 'btn-icon up') {
-          const prevLi = li.previousElementSibling;
-          if (prevLi) {
-            ul.insertBefore(li, prevLi);
-          }
         }
       }
     });
 
-  </script>
-</body>
 
-<script type="module">
-  function getallDattaOnce() {
+    function getallDattaOnce() {
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'get_categories.php', true);
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'get_categories.php', true);
 
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        // Parse the JSON response and process the data
-        var categories = JSON.parse(xhr.responseText);
-        console.log(categories);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          // Parse the JSON response and process the data
+          var categories = JSON.parse(xhr.responseText);
+          console.log(categories);
 
-        // Create an array of categories and fill it with the data received
-        var categoriesArray = [];
-        for (var i = 0; i < categories.length; i++) {
-          categoriesArray.push(categories[i]['category']);
+          // Create an array of categories and fill it with the data received
+          var categoriesArray = [];
+          for (var i = 0; i < categories.length; i++) {
+            categoriesArray.push(categories[i]['category']);
+          }
+          console.log(categoriesArray);
+
+          loadDataInList(categoriesArray)
+
+        } else {
+          console.log("Error fetching categories.");
         }
-        console.log(categoriesArray);
+      };
 
-        loadDataInList(categoriesArray)
+      xhr.send();
 
+    }
+
+    function addLists() {
+      if (addInput.value === '') {
+        alert('Enter the list name please!!!');
       } else {
-        console.log("Error fetching categories.");
+        const ul = divList.querySelector('ul');
+        const li = document.createElement('li');
+        const span = document.createElement("SPAN");
+        span.className = 'listName';
+        span.innerHTML = addInput.value;
+        li.appendChild(span);
+        // li.innerHTML = addInput.value;
+        addInput.value = '';
+        ul.appendChild(li);
+        createBtn(li);
       }
-    };
+    }
 
-    xhr.send();
 
-  }
+    function removeData(name) {
 
-  function addLists() {
-    if (addInput.value === '') {
-      alert('Enter the list name please!!!');
-    } else {
+      var category = name;
+      console.log(category);
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'delete_categories.php', true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      // Create a URL-encoded string from the category data
+      var data = "category=" + encodeURIComponent(category);
+
+      xhr.send(data);
+
+    }
+
+
+    addBtn.addEventListener('click', () => {
+      var category = "";
+
+      if (addInput.value === '') {
+        alert('Enter the list name please!!!');
+        return;
+      } else {
+        category = addInput.value;
+      }
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'add_categories.php', true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      // Create a URL-encoded string from the category data
+      var data = "category=" + encodeURIComponent(category);
+
+      xhr.send(data);
+
+      addLists();
+
+    });
+
+    toggleBtn.addEventListener('click', () => {
+      alert('Data saved');
+    });
+
+    function loadDataInList(category) {
+
+      const divList = document.querySelector('.listHolder');
       const ul = divList.querySelector('ul');
-      const li = document.createElement('li');
-      const span = document.createElement("SPAN");
-      span.className = 'listName';
-      span.innerHTML = addInput.value;
-      li.appendChild(span);
-      // li.innerHTML = addInput.value;
-      addInput.value = '';
-      ul.appendChild(li);
-      createBtn(li);
+
+      for (var i = 0; i < category.length; i++) {
+
+        const li = document.createElement('li');
+        const span = document.createElement("SPAN");
+        // li.classList.add("listName");s
+        span.className = 'listName';
+        span.innerHTML = category[i];
+        li.appendChild(span);
+        ul.appendChild(li);
+        createBtn(li);
+      }
+
     }
-  }
+    window.onload = getallDattaOnce;
 
-  addBtn.addEventListener('click', () => {
-    var category = "";
+  </script>
 
-    if (addInput.value === '') {
-      alert('Enter the list name please!!!');
-      return;
-    } else {
-      category = addInput.value;
-    }
-
-    // Get the category value
-    // var category = $("#category-input").val();
-
-    console.log(category);
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'add_categories.php', true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-
-    xhr.onload = function () {
-      console.log("loaded")
-    }
-
-    // Create a URL-encoded string from the category data
-    var data = "category=" + encodeURIComponent(category);
-
-
-    xhr.send(data);
-
-    addLists();
-
-  });
-
-
-  //const toggleBtn = document.querySelector('#toggleBtn');
-  toggleBtn.addEventListener('click', () => {
-
-    alert('Data saved');
-
-  });
-
-  function loadDataInList(category) {
-
-    const divList = document.querySelector('.listHolder');
-    const ul = divList.querySelector('ul');
-
-    for (var i = 0; i < category.length; i++) {
-
-      const li = document.createElement('li');
-      const span = document.createElement("SPAN");
-      // li.classList.add("listName");s
-      span.className = 'listName';
-      span.innerHTML = category[i];
-      li.appendChild(span);
-      ul.appendChild(li);
-      createBtn(li);
-    }
-
-  }
-
-  function createBtn(li) {
-    // create remove button
-    const remove = document.createElement('button');
-    remove.className = 'btn-icon remove';
-    li.appendChild(remove);
-
-    // create down button
-    const down = document.createElement('button');
-    down.className = 'btn-icon down';
-    li.appendChild(down);
-
-    // create up button
-    const up = document.createElement('button');
-    up.className = 'btn-icon up';
-    li.appendChild(up);
-
-    return li;
-  }
-
-  window.onload = getallDattaOnce;
-
-</script>
-
+</body>
 
 </html>
