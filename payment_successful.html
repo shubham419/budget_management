@@ -75,19 +75,16 @@
         <h3 style="text-align: center; padding-top:10px; font-size: 30px;">Category</h3>
 
         <div style="padding-left: 20px; padding-bottom: 10px; font-size: 25px; color: rgb(56, 54, 52);">
-            <input type="radio" name="Category">
-            <label>Food</label><br>
-            <input type="radio" name="Category">
-            <label>Cloth</label><br>
-            <input type="radio" name="Category">
-            <label>Travel</label><br>
-            <input type="radio" name="Category">
-            <label>Movie</label>
+
+            <div class="listHolder">
+
+            </div>
+
         </div>
 
     </div>
     <div>
-        <button type="button" id="button" class="button center" onclick="openPage('index.html')">
+        <button type="button" id="button" class="button center">
             <span class="button__text">Processed</span>
             <span class="button__icon"><ion-icon name="send-outline"></ion-icon></span>
         </button>
@@ -97,6 +94,105 @@
     function openPage(url) {
         window.open(url, "_self");
     }
+
+    button.addEventListener('click', () => {
+
+        var categorySelected = getRadioValue();
+        var moneySpend = getMoney();
+        saveData(categorySelected, moneySpend);
+        openPage('index.html')
+    })
+
+    function getRadioValue() {
+        var ele = document.getElementsByName('Category');
+
+        for (var i = 0; i < ele.length; i++) {
+            if (ele[i].checked) {
+                return ele[i].value;
+
+            }
+        }
+    }
+
+    function getMoney() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('value');
+    }
+
+
+    function getallDattaOnce() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'get_categories.php', true);
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Parse the JSON response and process the data
+                var categories = JSON.parse(xhr.responseText);
+                console.log(categories);
+
+                // Create an array of categories and fill it with the data received
+                var categoriesArray = [];
+                for (var i = 0; i < categories.length; i++) {
+                    categoriesArray.push(categories[i]['category']);
+                }
+                console.log(categoriesArray);
+
+                loadDataInList(categoriesArray)
+
+            } else {
+                console.log("Error fetching categories.");
+            }
+        };
+
+        xhr.send();
+    }
+
+    function saveData(categorySelected, moneySpend) {
+
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'add_transaction.php', true);
+
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        const data = "category=" + encodeURIComponent(categorySelected) + "&money_spend=" + encodeURIComponent(moneySpend);
+        xhr.send(data);
+
+    }
+
+    function loadDataInList(category) {
+
+        for (var i = 0; i < category.length; i++) {
+            const divList = document.querySelector('.listHolder');
+
+            var radioInput = document.createElement("input");
+            var label = document.createElement("label");
+            const lineBreak = document.createElement('br');
+            radioInput.type = "radio";
+            radioInput.value = category[i];
+            radioInput.name = "Category";
+            radioInput.className = "radioButton";
+            label.className = "radioName";
+            label.innerHTML = category[i];
+            label.appendChild(radioInput);
+            reverseChildren(label);
+            label.appendChild(lineBreak);
+            divList.parentNode.insertBefore(label, divList);
+
+        }
+
+    }
+
+    function reverseChildren(parent) {
+        for (var i = 1; i < parent.childNodes.length; i++) {
+            parent.insertBefore(parent.childNodes[i], parent.firstChild);
+        }
+    }
+
+
+
+    window.onload = getallDattaOnce;
+
 </script>
 
 </html>

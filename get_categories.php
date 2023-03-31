@@ -28,4 +28,7 @@ if ($stmt->execute()) {
 } else {
     echo "Error fetching records: " . $stmt->errorInfo()[2];
 }
+
+// Close connection
+$conn = null;
 ?>

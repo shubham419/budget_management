@@ -5,28 +5,28 @@ $user = "shubham";
 $port = "5432";
 $password = "123";
 
-// Check if the category value is set in the POST request
-if (isset($_POST['category'])) {
+// Check if the category and money_spend values are set in the POST request
+if (isset($_POST['category']) && isset($_POST['money_spend'])) {
     $category = $_POST['category'];
+    $money_spend = $_POST['money_spend'];
 } else {
-    die("Category value is not set.");
+    die("Category and/or money_spend values are not set.");
 }
 
 $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password";
 
-
 try {
     $conn = new PDO($dsn);
-    echo "Connected to the $dbname database successfully!";
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
 
-$sql = "DELETE FROM categories WHERE category = :category";
+$sql = "INSERT INTO transaction (category, money_spend) VALUES (:category, :money_spend)";
 
 // Prepare statement
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(":category", $category);
+$stmt->bindParam(":money_spend", $money_spend);
 
 // Execute statement
 if ($stmt->execute()) {
@@ -37,5 +37,4 @@ if ($stmt->execute()) {
 
 // Close connection
 $conn = null;
-
 ?>

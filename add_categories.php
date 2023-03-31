@@ -34,5 +34,6 @@ if ($stmt->execute()) {
 } else {
     echo "Error inserting record: " . $stmt->errorInfo()[2];
 }
-
+// Close connection
+$conn = null;
 ?>
