@@ -209,26 +209,30 @@
     const addBtn = document.querySelector('#addBtn');
 
     function addLists() {
-      if (addInput.value === '') {
-        alert('Enter the list name please!!!');
-      } else {
-        const ul = divList.querySelector('ul');
-        const li = document.createElement('li');
-        const span = document.createElement("SPAN");
-        span.className = 'listName';
-        span.innerHTML = addInput.value;
-        li.appendChild(span);
-        // li.innerHTML = addInput.value;
-        addInput.value = '';
-        ul.appendChild(li);
-        createBtn(li);
-      }
+
+
+
+
+      // if (addInput.value === '') {
+      //   alert('Enter the list name please!!!');
+      // } else {
+      //   const ul = divList.querySelector('ul');
+      //   const li = document.createElement('li');
+      //   const span = document.createElement("SPAN");
+      //   span.className = 'listName';
+      //   span.innerHTML = addInput.value;
+      //   li.appendChild(span);
+      //   // li.innerHTML = addInput.value;
+      //   addInput.value = '';
+      //   ul.appendChild(li);
+      //   createBtn(li);
+      // }
     }
 
     // add list when clicked on add item button
-    addBtn.addEventListener('click', () => {
-      addLists();
-    });
+    // addBtn.addEventListener('click', () => {
+    //   addLists();
+    // });
 
     // add list when pressed enter
     addInput.addEventListener('keyup', (event) => {
@@ -299,61 +303,92 @@
 </body>
 
 <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-  import { getDatabase, set, child, ref, update, get } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
-    authDomain: "budget-management-6b80f.firebaseapp.com",
-    databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
-    projectId: "budget-management-6b80f",
-    storageBucket: "budget-management-6b80f.appspot.com",
-    messagingSenderId: "190001410215",
-    appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
-    measurementId: "G-TS3P5XEB13"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-  const auth = getAuth();
-  const user = auth.currentUser;
-  const db = getDatabase();
-
-
   function getallDattaOnce() {
-    const dbRef = ref(db);
-    var category = [];
 
-    get(child(dbRef, "categories"))
-      .then((snapshot) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'get_categories.php', true);
 
-        snapshot.forEach(childSnapshot => {
-          category.push(childSnapshot.val());
-        });
-        loadDataInList(category);
-      });
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // Parse the JSON response and process the data
+        var categories = JSON.parse(xhr.responseText);
+        console.log(categories);
+
+        // Create an array of categories and fill it with the data received
+        var categoriesArray = [];
+        for (var i = 0; i < categories.length; i++) {
+          categoriesArray.push(categories[i]['category']);
+        }
+        console.log(categoriesArray);
+
+        loadDataInList(categoriesArray)
+
+      } else {
+        console.log("Error fetching categories.");
+      }
+    };
+
+    xhr.send();
 
   }
 
-  //const toggleBtn = document.querySelector('#toggleBtn');
-  toggleBtn.addEventListener('click', () => {
-    alert('Categories Updated');
+  function addLists() {
+    if (addInput.value === '') {
+      alert('Enter the list name please!!!');
+    } else {
+      const ul = divList.querySelector('ul');
+      const li = document.createElement('li');
+      const span = document.createElement("SPAN");
+      span.className = 'listName';
+      span.innerHTML = addInput.value;
+      li.appendChild(span);
+      // li.innerHTML = addInput.value;
+      addInput.value = '';
+      ul.appendChild(li);
+      createBtn(li);
+    }
+  }
 
-    var list = document.getElementsByClassName('listName');
-    var listArray = [];
-    for (var i = 0; i < list.length; i++) {
-      listArray.push(list[i].innerHTML);
+  addBtn.addEventListener('click', () => {
+    var category = "";
+
+    if (addInput.value === '') {
+      alert('Enter the list name please!!!');
+      return;
+    } else {
+      category = addInput.value;
     }
 
-    set(ref(database, 'categories/'), {
-      categoryList: listArray
-    })
+    // Get the category value
+    // var category = $("#category-input").val();
+
+    console.log(category);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'add_categories.php', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+
+    xhr.onload = function () {
+      console.log("loaded")
+    }
+
+    // Create a URL-encoded string from the category data
+    var data = "category=" + encodeURIComponent(category);
+
+
+    xhr.send(data);
+
+    addLists();
+
+  });
+
+
+  //const toggleBtn = document.querySelector('#toggleBtn');
+  toggleBtn.addEventListener('click', () => {
+
+    alert('Data saved');
+
   });
 
   function loadDataInList(category) {
@@ -361,19 +396,17 @@
     const divList = document.querySelector('.listHolder');
     const ul = divList.querySelector('ul');
 
-    for (var i = 0; i < category[0].length; i++) {
+    for (var i = 0; i < category.length; i++) {
 
       const li = document.createElement('li');
       const span = document.createElement("SPAN");
       // li.classList.add("listName");s
       span.className = 'listName';
-      span.innerHTML = category[0][i];
+      span.innerHTML = category[i];
       li.appendChild(span);
       ul.appendChild(li);
       createBtn(li);
-      // console.log(category[0][i]); 
     }
-    //  console.log(category);
 
   }
 
