@@ -15,7 +15,7 @@
   </style>
 </head>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="chart.js"></script>
 
 <body>
 
@@ -23,56 +23,53 @@
   <canvas id="bar" style="width:100%;max-width:600px"></canvas>
 
 
-  <script type="module">
-    import { getDatabase, set, child, ref, update, get } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
-      authDomain: "budget-management-6b80f.firebaseapp.com",
-      databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
-      projectId: "budget-management-6b80f",
-      storageBucket: "budget-management-6b80f.appspot.com",
-      messagingSenderId: "190001410215",
-      appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
-      measurementId: "G-TS3P5XEB13"
-    };
+  <script>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase();
+setPiChart()
+
     var finalCategories = [];
 
     function getallDattaOnce() {
       getCategories();
-      const dbRef = ref(db);
-      var transaction = [];
 
-      get(child(dbRef, "transaction"))
-        .then((snapshot) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'get_transaction.php', false);
 
-          snapshot.forEach(childSnapshot => {
-            transaction.push(childSnapshot.val());
-          });
-          console.log(transaction[0]["category"])
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          // Parse the JSON response and process the data
+          var transaction = JSON.parse(xhr.responseText);
+
+          console.log(transaction)
+
           var finalValue = getValue(transaction);
           setPiChart(finalValue);
           setBarChart(finalValue);
 
-        });
+        } else {
+          console.log("Error fetching transaction.");
+        }
+
+
+      }
+
+      xhr.send();
+
 
     }
 
     function getValue(transaction) {
-      // console.log(finalCategories[0]);
+  
       var size = finalCategories.length;
       console.log(size)
       var arrValue = new Array(size); for (let i = 0; i < size; ++i) arrValue[i] = 0;
 
       for (var i = 0; i < transaction.length; i++) {
         var indexNo = parseInt(getIndex(transaction[i]["category"]));
-        var money = parseInt(transaction[i]["moneySpend"]);
+        var money = parseInt(transaction[i]["money_spend"]);
         arrValue[indexNo] = arrValue[indexNo] + money;
       }
+      console.log(arrValue);
       return arrValue;
     }
 
@@ -86,27 +83,43 @@
     }
 
     function getCategories() {
-      const dbRef = ref(db);
+
       var category = [];
 
-      get(child(dbRef, "categories"))
-        .then((snapshot) => {
-          snapshot.forEach(childSnapshot => {
-            category.push(childSnapshot.val());
-          });
-          for (var i = 0; i < category[0].length; i++) {
-            finalCategories[i] = category[0][i];
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'get_categories.php', false);
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          // Parse the JSON response and process the data
+          var categories = JSON.parse(xhr.responseText);
+          console.log(categories);
+
+          // Create an array of categories and fill it with the data received
+          // var categoriesArray = [];
+          for (var i = 0; i < categories.length; i++) {
+            finalCategories.push(categories[i]['category']);
           }
-        });
+          console.log(finalCategories);
+        } else {
+          console.log("Error fetching categories.");
+        }
+      };
+
+      xhr.send();
+
     }
+
     window.onload = getallDattaOnce;
     //---------------------------------------------------------------------------------------------
 
     function setPiChart(finalValue) {
 
       var xValues = finalCategories;
-      // console.log(xValues)
       var yValues = finalValue;
+
+      // var xValues = ["faf","sfsf","saf"];
+      // var yValues = [0 , 10, 50];
       var barColors = [
         "#b91d47",
         "#00aba9",

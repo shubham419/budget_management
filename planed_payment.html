@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Planed Payment</title>
 
-  <style>
+	<style>
 		body {
 			background-color: #f2f2f2;
 			font-family: Arial, sans-serif;
@@ -44,7 +45,8 @@
 			padding: 10px;
 		}
 
-		input[type="text"], input[type="number"] {
+		input[type="text"],
+		input[type="number"] {
 			border-radius: 3px;
 			border: 1px solid #ccc;
 			box-sizing: border-box;
@@ -130,9 +132,60 @@
 			var listItem = document.createElement("li");
 			listItem.innerHTML = objectName + " - Price: " + price + ", EMI: " + emi + ", Duration: " + duration;
 			list.appendChild(listItem);
+			saveInDb(objectName, price, emi, duration);
 		}
+
+		function saveInDb(objectName, price, emi, duration) {
+			const xhr = new XMLHttpRequest();
+			xhr.open('POST', 'add_planed_payment.php', true);
+
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+			const data = "object_name=" + encodeURIComponent(objectName) + "&price=" + encodeURIComponent(price) + "&emi=" + encodeURIComponent(emi) + "&duration=" + encodeURIComponent(duration);
+			xhr.send(data);
+		}
+
+		function getallDattaOnce() {
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', 'get_planed_payment.php', true);
+
+			xhr.onload = function () {
+				if (xhr.status === 200) {
+					// Parse the JSON response and process the data
+					var planed_payment = JSON.parse(xhr.responseText);
+					console.log(planed_payment);
+
+					loadDataInList(planed_payment)
+
+				} else {
+					console.log("Error fetching categories.");
+				}
+			};
+
+			xhr.send();
+		}
+
+		function loadDataInList(planed_payment) {
+			for (var i = 0; i < planed_payment.length; i++) {
+				var objectName = planed_payment[i]['object_name'];
+				var price = planed_payment[i]['price'];
+				var emi = planed_payment[i]['emi'];
+				var duration = planed_payment[i]['duration'];
+
+				var list = document.getElementById("emi_list");
+				var listItem = document.createElement("li");
+				listItem.innerHTML = objectName + " - Price: " + price + ", EMI: " + emi + ", Duration: " + duration;
+				list.appendChild(listItem);
+
+			}
+
+		}
+
+		window.onload = getallDattaOnce;
+
 	</script>
 </head>
+
 <body>
 	<h1>Planed Payment</h1>
 
@@ -157,4 +210,5 @@
 	<h2>List:</h2>
 	<ol id="emi_list"></ol>
 </body>
+
 </html>

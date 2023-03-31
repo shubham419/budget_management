@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Payment History</title>
 	<style>
@@ -7,60 +8,89 @@
 			border-collapse: collapse;
 			width: 100%;
 			font-size: 1.2em;
+			color: #333;
+			font-family: Arial, sans-serif;
+			margin: 0 auto;
+			border: 1px solid #ccc;
+			box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+			font-family: Arial, Helvetica, sans-serif;
 		}
 
-		th, td {
+		th,
+		td {
 			padding: 10px;
 			text-align: left;
 			border-bottom: 1px solid #ddd;
 		}
 
 		th {
-			background-color: #f2f2f2;
+			background-color: #E02130;
+			font-weight: bold;
+			color: white;
 		}
 
 		tr:hover {
 			background-color: #f5f5f5;
 		}
+
+		tbody tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		tbody tr:nth-child(odd) {
+			background-color: #ffffff;
+		}
+
+		h1 {
+			text-align: center;
+			font-family: 'Helvetica Neue', sans-serif;
+			color: #E02130;
+		}
 	</style>
 </head>
+
 <body>
 	<h1 style="text-align: center;">Payment History</h1>
-	<table>
+	<table id="transaction-table">
 		<thead>
 			<tr>
-				<th>Merchant Name</th>
-				<th>Date</th>
+				<th>Transaction Id</th>
+				<th>Categories</th>
 				<th>Amount</th>
 			</tr>
 		</thead>
 		<tbody>
-			<!-- <tr>
-				<td>Merchant 1</td>
-				<td>January 1, 2023</td>
-				<td>$50.00</td>
-			</tr>
-			<tr>
-				<td>Merchant 2</td>
-				<td>January 15, 2023</td>
-				<td>$75.00</td>
-			</tr>
-			<tr>
-				<td>Merchant 3</td>
-				<td>February 1, 2023</td>
-				<td>$100.00</td>
-			</tr>
-			<tr>
-				<td>Merchant 4</td>
-				<td>February 15, 2023</td>
-				<td>$25.00</td>
-			</tr>
-			<tr>
-				<td>Merchant 5</td>
-				<td>March 1, 2023</td>
-				<td>$150.00</td>
-			</tr> -->
+			
 		</tbody>
 	</table>
+
+	<script>
+		function loadTransactions() {
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', 'add_transaction.php', true);
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+					const transactions = JSON.parse(xhr.responseText);
+					const tbody = document.querySelector('#transaction-table tbody');
+					tbody.innerHTML = '';
+					for (let i = 0; i < transactions.length; i++) {
+						const row = `<tr>
+										<td>${transactions[i].id}</td>
+										<td>${transactions[i].category}</td>
+										<td>${transactions[i].money_spend}</td>
+									</tr>`;
+						tbody.innerHTML += row;
+					}
+				}
+			};
+			xhr.send();
+		}
+
+		window.onload = function() {
+			loadTransactions();
+		};
+	</script>
+
 </body>
+
 </html>
