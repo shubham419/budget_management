@@ -195,7 +195,17 @@
 </body>
 <script>
   function openPage(url) {
-    window.open(url, "_self");
+    const email = document.querySelector('#email');
+    const password = document.querySelector('#password');
+
+    if(email.value === 'BG25@gamil.com' && password === '12345678'){
+      window.open(url, "_self");
+    }else{
+      alert('Invalid email or password')
+    }
+
+
+   
   }
 </script>
 <!-- <script type="module">
