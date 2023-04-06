@@ -2,10 +2,8 @@
 
 <head>
   <title>Sign up</title>
-  <link rel="stylesheet" href="cssFile.css">
 </head>
 <style>
-  /*@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);*/
   *:focus {
     outline: none;
   }
@@ -171,90 +169,74 @@
 
 <body>
 
-  <div id="login-box" style="height: 400px;">
-    <div class="left">
-      <h1 id='status'>login</h1>
-      <input type="text" id="email" name="email" placeholder="E-mail" />
-      <input type="password" id="password" name="password" placeholder="Password" />
+<div id="login-box" style="height: 400px;">
+  <div class="left">
+    <h1 id='status'>login</h1>
+    <input type="text" id="email" name="email" placeholder="E-mail" />
+    <input type="password" id="password" name="password" placeholder="Password" />
 
-      <input type="submit" id='logIn' name="login" value="login" onclick="openPage('index.html')" />
-      <div>
-        <h5 onclick="openPage('signin.html')" style="cursor:pointer; ">create new account</h5>
-      </div>
+    <input type="submit" id='logIn' name="login" value="login" onclick="validate_user()" />
+    <div>
+      <h5 onclick="openPage('signin.html')" style="cursor:pointer; ">create new account</h5>
     </div>
-
-    <div class="right">
-      <span class="loginwith">Sign in with<br />social network</span>
-
-      <button class="social-signin facebook">Log in with facebook</button>
-      <button class="social-signin twitter">Log in with Twitter</button>
-      <button class="social-signin google">Log in with Google+</button>
-    </div>
-    <div class="or">OR</div>
   </div>
+
+  <div class="right">
+    <span class="loginwith">Sign in with<br />social network</span>
+
+    <button class="social-signin facebook">Log in with facebook</button>
+    <button class="social-signin twitter">Log in with Twitter</button>
+    <button class="social-signin google">Log in with Google+</button>
+  </div>
+  <div class="or">OR</div>
+</div>
 </body>
 <script>
   function openPage(url) {
-    const email = document.querySelector('#email');
-    const password = document.querySelector('#password');
 
-    if(email.value === 'BG25@gamil.com' && password === '12345678'){
       window.open(url, "_self");
-    }else{
-      alert('Invalid email or password')
-    }
-
-
-   
   }
+
+     function validate_user(){
+
+      const xhr = new XMLHttpRequest();
+			xhr.open('GET', 'get_user.php', true);
+
+			xhr.onload = function () {
+				if (xhr.status === 200) {
+					// Parse the JSON response and process the data
+					var userList = JSON.parse(xhr.responseText);
+					console.log(userList);
+
+					check(userList)
+
+				} else {
+					console.log("Error fetching database.");
+				}
+			};
+
+			xhr.send();
+     }
+
+     function check(userList){
+      const email = document.querySelector('#email');
+      const password = document.querySelector('#password');
+      console.log(email.value);
+      console.log(password.value);
+      for(var i = 0 ; i<userList.length ; i++){
+          console.log(userList[i]['user_email'])
+          if(email.value == userList[i]['user_email']){
+            if(password.value == userList[i]['user_password']){
+              openPage('index.html');
+              return;
+            }else{
+              alert('Password Incorrect!');
+            }
+          }
+      }
+      alert('User not exist');
+     }
+
+
 </script>
-<!-- <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-  import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-  apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
-  authDomain: "budget-management-6b80f.firebaseapp.com",
-  databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
-  projectId: "budget-management-6b80f",
-  storageBucket: "budget-management-6b80f.appspot.com",
-  messagingSenderId: "190001410215",
-  appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
-  measurementId: "G-TS3P5XEB13"
-
-};
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-  const auth = getAuth();
-
-logIn.addEventListener('click',(e)=>{
-
-  var email = document.getElementById('email').value;
-   var password = document.getElementById('password').value;
-
-      signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        const dt = new Date();
-         update(ref(database, 'users/' + user.uid),{
-          last_login: dt,
-        })
-        openPage('index.html')
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
-  });
- });
-
-</script> -->
-
 </html>

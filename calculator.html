@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <script>
+    let inputNumber = prompt("Enter a number:"); // Prompt the user to enter a number
+
+if (inputNumber > 100) { // Check if the input number is greater than 100
+  console.log("The number is greater than 100."); // If true, display this message
+} else {
+  console.log("The number is not greater than 100."); // If false, display this message
+}
+  </script>
+</head>
+<body>
+  <label>Enter first number:</label>
+  <input type="number" id="num1"><br><br>
+  <label>Enter second number:</label>
+  <input type="number" id="num2"><br><br>
+  <button onclick="add()">Addition</button>
+  <button onclick="subtract()">Subtraction</button>
+  <button onclick="multiply()">Multiplication</button>
+  <button onclick="divide()">Division</button><br><br>
+  <label>Result:</label>
+  <input type="text" id="result"><br><br>
+
+  <script>
+    function add() {
+      var num1 = parseFloat(document.getElementById("num1").value);
+      var num2 = parseFloat(document.getElementById("num2").value);
+      var result = num1 + num2;
+      document.getElementById("result").value = result;
+    }
+
+    function subtract() {
+      var num1 = parseFloat(document.getElementById("num1").value);
+      var num2 = parseFloat(document.getElementById("num2").value);
+      var result = num1 - num2;
+      document.getElementById("result").value = result;
+    }
+
+    function multiply() {
+      var num1 = parseFloat(document.getElementById("num1").value);
+      var num2 = parseFloat(document.getElementById("num2").value);
+      var result = num1 * num2;
+      document.getElementById("result").value = result;
+    }
+
+    function divide() {
+      var num1 = parseFloat(document.getElementById("num1").value);
+      var num2 = parseFloat(document.getElementById("num2").value);
+      var result = num1 / num2;
+      document.getElementById("result").value = result;
+    }
+  </script>
+</body>
+</html>

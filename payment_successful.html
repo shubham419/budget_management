@@ -88,6 +88,11 @@
             <span class="button__text">Processed</span>
             <span class="button__icon"><ion-icon name="send-outline"></ion-icon></span>
         </button>
+
+        <button type="button" id="home" class="button center">
+            <span class="button__text">Home</span>
+            <span class="button__icon"><ion-icon name="send-outline"></ion-icon></span>
+        </button>
     </div>
 </body>
 <script>
@@ -100,6 +105,9 @@
         var categorySelected = getRadioValue();
         var moneySpend = getMoney();
         saveData(categorySelected, moneySpend);
+    })
+
+    home.addEventListener('click', () => {
         openPage('index.html')
     })
 

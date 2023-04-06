@@ -2,10 +2,8 @@
 
 <head>
   <title>sign in</title>
-  <link rel="stylesheet" href="cssFile.css">
 </head>
 <style>
-  /*@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);*/
   *:focus {
     outline: none;
   }
@@ -32,6 +30,7 @@
 
   .left {
     position: absolute;
+    margin-top: 70px;
     top: 0;
     left: 0;
     box-sizing: border-box;
@@ -171,103 +170,56 @@
 
 <body>
 
-  <div id="login-box">
-    <div class="left">
-      <div>
-        <h1 id='status'>Sign in</h1>
-        <input type="text" id="username" name="username" placeholder="Firstname" />
-        <input type="text" id="Middlename" name="username" placeholder="Middlename" />
-        <input type="text" id="Lastname" name="username" placeholder="Lastname" />
-        <input type="text" id="phone" name="username" placeholder="phone no." />
-        <input type="text" id="Address" name="username" placeholder="Current Address" />
-        <input type="text" id="email" name="email" placeholder="E-mail" />
-        <input type="password" id="password" name="password" placeholder="Password" />
+<div id="login-box">
+  <div class="left">
+    <div>
+      <h1 id='status'>Sign in</h1>
+      <input type="text" id="username" name="username" placeholder="Name" />
+      <input type="text" id="phone" name="username" placeholder="phone no." />
+      <input type="text" id="email" name="email" placeholder="E-mail" />
+      <input type="password" id="password" name="password" placeholder="Password" />
 
-        <input type="submit" id='sighUp' name="sighUp" value="Signin" />
-      </div>
-      <div>
-        <h5 onclick="openPage('signup.html')" style="cursor: pointer;">already have account?</h5>
-      </div>
+      <input type="submit" id='sighUp' name="sighUp" value="Signin" />
     </div>
-
-    <div class="right" style="margin-top: 100px;">
-      <span class="loginwith">Sign in with<br />social network</span>
-
-      <button class="social-signin facebook">Log in with facebook</button>
-      <button class="social-signin twitter">Log in with Twitter</button>
-      <button class="social-signin google">Log in with Google+</button>
+    <div>
+      <h5 onclick="openPage('signup.html')" style="cursor: pointer;">already have account?</h5>
     </div>
-    <div class="or" style="margin-top: 100px;">OR</div>
   </div>
+
+  <div class="right" style="margin-top: 100px;">
+    <span class="loginwith">Sign in with<br />social network</span>
+
+    <button class="social-signin facebook">Log in with facebook</button>
+    <button class="social-signin twitter">Log in with Twitter</button>
+    <button class="social-signin google">Log in with Google+</button>
+  </div>
+  <div class="or" style="margin-top: 100px;">OR</div>
+</div>
 </body>
 <script>
   function openPage(url) {
     window.open(url, "_self");
   }
 </script>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-  import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
-  // TODO: Add SDKs for Firebase products that you want to use
+<script>
 
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyAZaRZNskOX-t-C4teO1sIvmYdoRiv0-2M",
-    authDomain: "budget-management-6b80f.firebaseapp.com",
-    databaseURL: "https://budget-management-6b80f-default-rtdb.firebaseio.com",
-    projectId: "budget-management-6b80f",
-    storageBucket: "budget-management-6b80f.appspot.com",
-    messagingSenderId: "190001410215",
-    appId: "1:190001410215:web:7daa2cc364e165fbbd2b82",
-    measurementId: "G-TS3P5XEB13"
-
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-  const auth = getAuth();
-
-  sighUp.addEventListener('click', (e) => {
+  sighUp.addEventListener('click', () => {
 
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var username = document.getElementById('username').value;
-    var Middlename = document.getElementById('Middlename').value;
-    var Lastname = document.getElementById('Lastname').value;
     var phone = document.getElementById('phone').value;
-    var Address = document.getElementById('Address').value;
 
+    const xhr = new XMLHttpRequest();
+			xhr.open('POST', 'add_user.php', true);
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-        set(ref(database, 'users/' + user.uid), {
-          firstname: username,
-          Middlename: Middlename,
-          Lastname: Lastname,
-          phone: phone,
-          Address: Address,
-          email: email,
-          password: password
-        })
+			const data = "name=" + encodeURIComponent(username) + "&phone=" + encodeURIComponent(phone) + "&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password);
+			xhr.send(data);
 
-        alert('user created!');
-        openPage('index.html')
-
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        alert(errorMessage);
-        // ..
-      });
+      alert('user created!');
+      openPage('signup.html')
 
   });
 
